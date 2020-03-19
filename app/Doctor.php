@@ -12,4 +12,5 @@ class Doctor extends Model
         'doctor_id', 'doctor_name', 'specialist'
     ];
     public $incrementing = false;
+    public $timestamps = false;
 }

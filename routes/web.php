@@ -19,6 +19,9 @@
 Route::get('/', function(){
     return view('pasien.register');
 });
+//admin
+Route::resource('doctor', 'DoctorController');
+Route::get('admin/dashboard', 'AdminController@dashboard')->name('dashboard'); 
 
 Route::get('/pasien/konsultasi', 'ConsultationController@index');
 ROute::post('/pasien/konsultasi', 'ConsultationController@store')->name('addKonsultasi');

@@ -1,276 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html>
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
-
-    <!-- Title Page-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title')</title>
-
-    <!-- Fontfaces CSS-->
-    <link href="{{url('lib/css/font-face.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
-
-    <!-- Bootstrap CSS-->
-    <link href="{{url('lib/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-
-    <!-- lib CSS-->
-    <link href="{{url('lib/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/wow/animate.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/css-hamburgers/hamburgers.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/slick/slick.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/select2/select2.min.css')}}" rel="stylesheet" media="all">
-    <link href="{{url('lib/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="{{url('lib/css/theme.css')}}" rel="stylesheet" media="all">
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <link rel="stylesheet" href="{{url('assets/sufee/css/normalize.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/css/cs-skin-elastic.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/css/lib/datatable/dataTables.bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/sufee/scss/style.css')}}">
+    <link href="{{url('assets/fancybox/jquery.fancybox.css')}}" rel="stylesheet" />
+    <link href="{{url('assets/sufee/css/hover.css')}}" rel="stylesheet" />
+    <style>
+      .table .thead-primary th {
+        color: #fff;
+        background-color: #6495ED;
+        border-color: #6495ED; }
+    </style>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
-
-<body class="animsition">
+<body>
+    <!-- Left Panel -->
     @section('sidebar')
-    <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <h2 class="title-1">Admin</h2>
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
+      <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#">Admin</a>
+                <a class="navbar-brand hidden" href="./">A</a>
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ route('dashboard') }}"><i class="menu-icon fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li><a href="{{ route('doctor.index') }}"><i class="menu-icon fa fa-user"></i> Daftar Dokter</a></li>          
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+      </aside><!-- /#left-panel -->
+
+      <div id="right-panel" class="right-panel">
+        <!-- right panel-->
+        <header id="header" class="header">
+            <div class="header-menu">
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a class="nav-link" href="#"><i class="fa fa-power"></i>Logout</a>
                     </div>
                 </div>
             </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-                        <li>
-                            <a href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Forms</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Data Calon Pengurus</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Data Perlombaan</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Konten</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Informasi/Agenda</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Galeri</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Slider</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>Validasi</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="button.html">Validasi Informasi/Agenda</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Valdasi Galeri</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Akun</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="register.html">Akun Admin</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Akun Sosial Media</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
         </header>
-        <!-- END HEADER MOBILE-->
-
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                    <h1 class="title-1">Admin</h1>
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Forms</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="login.html">Data Calon Pengurus</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Data Perlombaan</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Konten</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                <a href="{{url('informasi')}}">Informasi/Agenda</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Galeri</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Slider</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>Validasi</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="button.html">Validasi Informasi/Agenda</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Validasi Galeri</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-users"></i>Akun</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="register.html">Akun Admin</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Akun Sosial Media</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-        <!-- END MENU SIDEBAR-->
-        @show
-
-        @section('header')
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
-                            <div class="header-button">
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="{{url('lib/images/icon/avatar-01.jpg')}}" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- HEADER DESKTOP-->
-            @show
-
-            <div class="container">
-                @yield('content')
-            </div>
-            <!-- END PAGE CONTAINER-->
-        </div>
-
+      <!-- end right panel -->
+    @show    
+    @yield('content')          
     </div>
 
-    <!-- Jquery JS-->
-    <script src="{{url('lib/jquery-3.2.1.min.js')}}"></script>
-    <!-- Bootstrap JS-->
-    <script src="{{url('lib/bootstrap-4.1/popper.min.js')}}"></script>
-    <script src="{{url('lib/bootstrap-4.1/bootstrap.min.js')}}"></script>
-    <!-- lib JS       -->
-    <script src="{{url('lib/slick/slick.min.js')}}">
-    </script>
-    <script src="{{url('lib/wow/wow.min.js')}}"></script>
-    <script src="{{url('lib/animsition/animsition.min.js')}}"></script>
-    <script src="{{url('lib/bootstrap-progressbar/bootstrap-progressbar.min.js')}}">
-    </script>
-    <script src="{{url('lib/counter-up/jquery.waypoints.min.js')}}"></script>
-    <script src="{{url('lib/counter-up/jquery.counterup.min.js')}}">
-    </script>
-    <script src="{{url('lib/circle-progress/circle-progress.min.js')}}"></script>
-    <script src="{{url('lib/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
-    <script src="{{url('lib/chartjs/Chart.bundle.min.js')}}"></script>
-    <script src="{{url('lib/select2/select2.min.js')}}">
+    <script src="{{url('assets/sufee/js/vendor/jquery-2.1.4.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/popper.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/plugins.js')}}"></script>
+    <script src="{{url('assets/sufee/js/main.js')}}"></script>
+    <script src="{{url('assets/sufee/js/dashboard.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/datatables.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/jszip.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/pdfmake.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/vfs_fonts.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/buttons.html5.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/buttons.print.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/buttons.colVis.min.js')}}"></script>
+    <script src="{{url('assets/sufee/js/lib/data-table/datatables-init.js')}}"></script>    
+    <script src="{{url('assets/fancybox/jquery.fancybox.js')}}"></script> 
+    <script src="{{url('assets/js/jquery.js')}}"></script>
+    <script type="text/javascript">
+      $(function() {
+        //    fancybox
+          jQuery(".fancybox").fancybox();
+      });
+
     </script>
 
-    <!-- Main JS-->
-    <script src="{{url('lib/js/main.js')}}"></script>
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('#bootstrap-data-table').DataTable();
+        } );
+    </script>
+  
 </body>
 </html>
-<!-- end document-->
