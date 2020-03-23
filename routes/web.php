@@ -23,8 +23,8 @@ Route::get('/', function(){
 Route::resource('doctor', 'DoctorController');
 Route::get('admin/dashboard', 'AdminController@dashboard')->name('dashboard'); 
 
-Route::get('/pasien/konsultasi', 'ConsultationController@index');
-ROute::post('/pasien/konsultasi', 'ConsultationController@store')->name('addKonsultasi');
+Route::get('/pasien/konsultasi', 'ConsultationController@index')->name('patientConsult');
+Route::post('/pasien/konsultasi', 'ConsultationController@store')->name('addKonsultasi');
 Route::get('/login/pasien', function(){
     return view('pasien.login');
 });

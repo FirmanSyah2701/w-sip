@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Consult;
 use App\Doctor;
 use App\Category;
 class ConsultationController extends Controller
@@ -16,8 +17,8 @@ class ConsultationController extends Controller
     public function store(Request $req){
         $req->validate([
             'name'           => 'required|string|max:30|regex:/^[a-zA-Z\s]*$/',
-            'category'       => 'required',
-            'doctor'         => 'required',
+            'category_id'    => 'required',
+            'doctor_id'      => 'required',
             'consult'        => 'required|max:255'
         ],
         [
@@ -31,11 +32,12 @@ class ConsultationController extends Controller
 
         $data = array(
             'name'          => $req->name,
-            'category'      => $req->category,
-            'doctor'        => $req->doctor,
+            'category_id'   => $req->category_id,
+            'doctor_id'     => $req->doctor_id,
             'consult'       => $req->consult
         );
 
-        return $data;
+        Consult::create($data);
+        return redirect()->route('patientConsult')->with('success', 'Data Berhasil Ditambah');
     }
 }

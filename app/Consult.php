@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consult extends Model
 {
-    protected $table = 'consult';
+    protected $table = 'consults';
     protected $primaryKey = 'consult_id';
     protected $fillable = [
         'name','consult_id', 'category_id', 'doctor_id', 'consult'
     ];
+
+    public $timestamps = false;
 
     public function doctor(){
         return $this->belongsTo('App\Doctor', 'doctor_id');
