@@ -32,6 +32,16 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
+                <div class="col-md-12">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                          @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                          @endforeach  
+                        </ul>  
+                    </div> 
+                    @endif
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">Daftar Dokter</strong>
@@ -145,12 +155,6 @@
             <form action="{{route('doctor.update', $row->doctor_id)}}" class="form-horizontal tasi-form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
-                <div class="row form-group">
-                    <label class="col-sm-4 control-label">NIP/NIK</label>
-                    <div class="col-sm-8">        
-                        <input type="text" name="doctor_id" class="form-control" value="{{ $row->doctor_id }}">
-                    </div>
-                </div>
 
                 <div class="row form-group">
                     <label class="col-sm-4 control-label">Nama Dokter</label>

@@ -19,6 +19,20 @@ class DoctorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+                'doctor_id'     => 'required|numeric|max:12|regex:/^[0-9]*$/',
+                'doctor_name'   => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/',
+                'specialist'    => 'required|string|max:50|regex:/^[a-zA-Z\s&]*$/'
+            ],
+            [
+                'required'            => 'Data tidak boleh kosong',
+                'numeric'             => 'Data harus diisi dengan angka',
+                'string'              => 'Data harus diisi dengan huruf/kata',
+                'doctor_id.max'       => 'Tidak boleh lebih 12 digit angka',
+                'doctor_name.max'     => 'Tidak boleh lebih 100 huruf',
+                'specialist.max'      => 'Tidak boleh lebih 50 huruf',
+            ]
+        );
 
         $data = array(
             'doctor_id'     => $request->doctor_id,
@@ -44,8 +58,19 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'doctor_name'   => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/',
+            'specialist'    => 'required|string|max:50|regex:/^[a-zA-Z\s&]*$/'
+        ],
+        [
+            'required'            => 'Data tidak boleh kosong',
+            'numeric'             => 'Data harus diisi dengan angka',
+            'string'              => 'Data harus diisi dengan huruf/kata',
+            'doctor_name.max'     => 'Tidak boleh lebih 100 huruf',
+            'specialist.max'      => 'Tidak boleh lebih 50 huruf',
+        ]
+    );
         $data = array(
-            'doctor_id'     => $request->doctor_id,
             'doctor_name'   => $request->doctor_name,
             'specialist'    => $request->specialist
         );

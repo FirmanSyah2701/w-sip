@@ -15,7 +15,7 @@ class ConsultationController extends Controller
 
     public function store(Request $req){
         $req->validate([
-            'name'           => 'required|string|max:30|min:4|regex:/^[a-zA-Z ]*$/',
+            'name'           => 'required|string|max:30|regex:/^[a-zA-Z\s]*$/',
             'category'       => 'required',
             'doctor'         => 'required',
             'consult'        => 'required|max:255'
