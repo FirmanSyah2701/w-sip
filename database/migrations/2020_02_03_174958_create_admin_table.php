@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateAdminTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->increments('category_id', 2);
-            $table->string('category_name', 80);
+        Schema::create('admin', function (Blueprint $table) {
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('nama');
+            //$table->timestamp('last_login');
+            //$table->timestamps();
         });
     }
 
@@ -26,6 +29,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('admin');
     }
 }

@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'pasien',
         ],
 
         'api' => [
@@ -49,8 +49,13 @@ return [
 
         'admin' => [
             'driver'    => 'session',
-            'providers' => 'admins',
-        ]
+            'providers' => 'admin',
+        ],
+        
+        'pasien' => [
+            'driver' => 'session',
+            'provider' => 'pasien',
+        ],
     ],
 
     /*
@@ -76,10 +81,16 @@ return [
             'model' => App\User::class,
         ],
 
-        'admins' => [
+        'admin' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
         ],
+
+        'pasien' => [
+            'driver' => 'eloquent',
+            'model' => App\Pasien::class,
+        ],
+
     ],
 
     /*
@@ -100,12 +111,6 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-
-        'admins' => [
-            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
         ],

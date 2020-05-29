@@ -16,13 +16,15 @@
   <form class="needs-validation" >
     <div class="form-row">
       <div class="col-md-4 mb-3">
-        <label for="validationCustom01">No. KTP</label>
+        <label for="validationCustom01">Username</label>
         <input type="text" class="form-control" id="validationCustom01" value="" required>
         <div class="valid-feedback">
           Looks good!
         </div>
       </div>
-
+    </div>
+    
+    <div class="form-row">
       <div class="col-md-4 mb-3">
         <label for="validationCustom01">Nama Depan</label>
         <input type="text" class="form-control" id="validationCustom01" value="" required>
@@ -30,14 +32,6 @@
           Looks good!
         </div>
       </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationCustom02">Nama Belakang</label>
-        <input type="text" class="form-control" id="validationCustom02" value="" required>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-    </div>
     <div class="form-row">
       <div class="col-md-6 mb-3">
         <label for="validationCustom03">Alamat</label>
@@ -46,25 +40,6 @@
           Please provide a valid city.
         </div>
       </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom04">Jenis Kelamin</label>
-        <select class="custom-select" id="validationCustom04" required>
-          <option selected disabled value="">Pilih..</option>
-          <option>Laki-Laki</option>
-          <option>Perempuan</option>
-        </select>
-        <div class="invalid-feedback">
-          Please select a valid state.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom05">No Hp</label>
-        <input type="text" class="form-control" id="validationCustom05" required>
-        <div class="invalid-feedback">
-          Please provide a valid zip.
-        </div>
-      </div>
-    </div>
     <button class="btn btn-primary" type="submit">Daftar</button>
   </form>
 

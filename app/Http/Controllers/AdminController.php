@@ -10,7 +10,6 @@ use illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AdminController extends Controller
 {
-
     public function dashboard(Request $request){
         return view('admin.dashboard');
     }

@@ -1,13 +1,12 @@
 @extends('pasien.template')
 
-@section('title', 'Konsultasi')
+@section('title', 'Ambil antrian')
     
 @section('sidebar')
     @parent
 @endsection
 
 @section('content')
-
 <div class="breadcrumbs">
     <div class="col-sm-4">
         <div class="page-header float-left">
@@ -21,8 +20,8 @@
             <div class="page-title">
                 <ol class="breadcrumb text-right">
                     <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Konsultasi</a></li>
-                    <li class="active">Konsultasi</li>
+                    <li><a href="#">Daftar berobat</a></li>
+                    <li class="active">Ambil antrian</li>
                 </ol>
             </div>
         </div>
@@ -35,13 +34,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Form Konsultasi</strong>
+                        <strong class="card-title">Form Ambil Antrian</strong>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('addKonsultasi')}}" method="POST">
+                        <form action="{{ route('ambilAntrianPost') }}" method="POST">
                             @csrf
                             <div class="col-md-12">
-                                <input type="hidden" name="id_pasien" value="{{ Session::get('id_pasien') }}">
+                                <input type="hidden" name="nama_pasien" value="{{ Session::get('nama_pasien') }}">
                                 <label for="">Kategori Konsultasi</label>
                                 <select name="id_poli" class="form-control">
                                     <option value="" selected disabled>Pilih kategori</option>
@@ -49,11 +48,6 @@
                                         <option value="{{ $data->id_poli }}">{{ $data->nama_poli }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="" style="margin-top:7px;">Konsultasi</label>
-                                <textarea class="form-control" name="konsul_pasien" placeholder="Isi konsultasi anda" rows="15"></textarea>
                             </div>
 
                             <div class="col-md-12">

@@ -3,41 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Consult;
-use App\Doctor;
-use App\Category;
+use App\Konsul;
+use App\Dokter;
+use App\Poli;
+
 class ConsultationController extends Controller
 {
-    public function index(){
-        $doctor     = Doctor::orderBy('doctor_name', 'asc')->get();
-        $category   = Category::orderBy('category_name', 'asc')->get(); 
-        return view('pasien.konsultasi', compact('doctor', 'category'));
+    public function index(Request $request){
+        if(!$request->session()->exists('id_pasien')){
+            return redirect()->route('loginPasien');
+        }else{
+            $dokter     = Dokter::all();
+            $poli       = Poli::all(); 
+            return view('pasien.konsultasi', compact('dokter', 'poli'));
+        }
+    }
+
+    public function jawaban_konsul(){
+        return view('pasien.jawaban_konsul');
     }
 
     public function store(Request $req){
-        $req->validate([
-            'name'           => 'required|string|max:30|regex:/^[a-zA-Z\s]*$/',
-            'category_id'    => 'required',
-            'doctor_id'      => 'required',
-            'consult'        => 'required|max:255'
-        ],
-        [
-            'consult.max'    => 'Konsultasi maksimal 255 character',  
-            'name.max'       => 'Nama maksimal 30 character',
-            'name.min'       => 'Nama minimal 4 character', 
-            'name.regex'     => 'Nama tidak boleh angka dan simbol',
-            'required'       => 'Field tidak boleh kosong'
-        ]
-    );
 
         $data = array(
-            'name'          => $req->name,
-            'category_id'   => $req->category_id,
-            'doctor_id'     => $req->doctor_id,
-            'consult'       => $req->consult
+            'id_pasien'           => $req->id_pasien,
+            'id_poli'             => $req->id_poli,
+            'konsul_pasien'       => $req->konsul_pasien
         );
 
-        Consult::create($data);
+        Konsul::create($data);
         return redirect()->route('patientConsult')->with('success', 'Data Berhasil Ditambah');
     }
 }
