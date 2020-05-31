@@ -18,6 +18,11 @@ class CreateDokterTable extends Migration
             $table->string('nama_dokter', 100);
             $table->integer('id_poli')->unsigned();
             $table->foreign('id_poli')->references('id_poli')->on('poli');
+            $table->string('jk');
+            $table->string('no_telp');
+            $table->string('alamat');
+            $table->string('foto');
+            $table->string('password');
         });
     }
 

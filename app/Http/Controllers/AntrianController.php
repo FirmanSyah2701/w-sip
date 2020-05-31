@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Antrian;
 use App\Poli;
+use App\Dokter;
 use DB;
 class AntrianController extends Controller
 {
@@ -19,10 +20,12 @@ class AntrianController extends Controller
     }
 
     public function store(Request $request){
+        $dokter = DB::table('dokter')->where('id_poli', $request->id_poli)->get();
         $data = array(
             'id_poli'           => $request->id_poli,
             'no_antrian'        => null,
-            'nama_pasien'       => $request->nama_pasien
+            'nama_pasien'       => $request->nama_pasien,
+            'id_dokter'         => $dokter[0]->id_dokter
         );
 
         Antrian::create($data);
@@ -32,7 +35,8 @@ class AntrianController extends Controller
     public function show($name)
     {
         $antri = DB::table('antrian')->where('nama_pasien', $name)->get();
-        return view('pasien.lihat_antri', compact('antri'));
+        $poli  = Poli::all();
+        return view('pasien.lihat_antri', compact('antri', 'poli'));
     }
 
     /**

@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Konsul;
 use App\Dokter;
 use App\Poli;
+use DB;
 
-class ConsultationController extends Controller
+class KonsulController extends Controller
 {
     public function index(Request $request){
         if(!$request->session()->exists('id_pasien')){
@@ -24,13 +25,19 @@ class ConsultationController extends Controller
     }
 
     public function store(Request $req){
+        $req->validate([
+            'id_pasien'             => 'required',
+            'id_poli'               => 'required',
+            'konsul_pasien'         => 'required|max:225'
+        ]);
 
-        $data = array(
-            'id_pasien'           => $req->id_pasien,
-            'id_poli'             => $req->id_poli,
-            'konsul_pasien'       => $req->konsul_pasien
-        );
-
+        $dokter = DB::table('dokter')->where('id_poli', $req->id_poli)->value('id_dokter');
+            $data = array(
+                'id_pasien'           => $req->id_pasien,
+                'id_poli'             => $req->id_poli,     
+                'id_dokter'           => $dokter,
+                'konsul_pasien'       => $req->konsul_pasien
+            );
         Konsul::create($data);
         return redirect()->route('patientConsult')->with('success', 'Data Berhasil Ditambah');
     }

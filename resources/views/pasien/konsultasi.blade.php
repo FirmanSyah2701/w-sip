@@ -29,6 +29,25 @@
     </div>
 </div>
 
+@if(session()->has('success'))
+    <div class='container'>
+        <div class='alert alert-success alert-dismissable'>
+            <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
+                {{ session()->get('success') }}
+        </div>
+    </div>
+@elseif($errors->any())
+    <div class='container'>
+        <div class="alert alert-danger alert-dismissable">
+            <a href='#' class='close' data-dismiss='alert' aria-label='close'>×</a>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach  
+            </ul>
+        </div>  
+    </div>
+    @endif
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">

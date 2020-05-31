@@ -29,10 +29,11 @@ class LoginController extends Controller
         ];
 
         $validator = Validator::make($request->all(),[
-                'username'  => 'required',
+                'username'  => 'required|exists:pasien',
                 'password'  => 'required|string',
             ], 
             [
+                'username.exists'    => 'Akun tidak terdaftar',   
                 'username.required'  => 'Username tidak boleh kosong',
                 'password.required'  => 'Password tidak boleh kosong',
                 'username.regex'     => 'Format username salah'
@@ -41,7 +42,6 @@ class LoginController extends Controller
 
         if($validator->fails()) {
             return view('pasien.login')->withErrors($validator);
-            dd($validator);
         }else{
             if($auth->attempt($credentials)){
                 $id_pasien  = DB::table('pasien')->where('username', $request->username)->value('id_pasien');

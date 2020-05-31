@@ -38,9 +38,8 @@
                     </div>
                     <div class="card-body">
                         <p style="font-weight:bold">Nama: {{ $antri[0]->nama_pasien }}</p>
-                        <p style="font-weight:bold">Nomer Urut Antrian:  </p>
-                        <p style="font-weight:bold">Kategori: {{ $antri[0]->id_poli }}</p>
-                        <p style="font-weight:bold">Nama Dokter: </p>
+                        <p style="font-weight:bold">Nomer Urut Antrian: {{ $antri[0]->no_antrian }} </p>
+                        <p style="font-weight:bold">Kategori: {{ $poli[0]->nama_poli }}</p>
                     </div>
                 </div>
             </div>

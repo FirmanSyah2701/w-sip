@@ -4,8 +4,19 @@
   <title>Login Pasien</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{url('assets/sufee/css/bootstrap.min.css')}}">
  </head>
  <body>
+	@if($errors->any())
+	<!-- <div class="alert alert-success">success</div> -->
+	<div class="alert alert-danger">
+		<ul>
+		  @foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+		  @endforeach  
+		</ul>  
+	</div> 
+	@endif
  	<div id="card">
 			<div id="card-content">
 		<div id="card-title">
@@ -15,8 +26,8 @@
 		</div>
 		<form  action="{{route('loginPasienPost')}}" class="form" method="POST">
 			@csrf 
-			<label for="user-email" style="padding-top:13px">&nbsp;Username</label>
-			<input id="user-email" class="form-content"
+			<label for="username" style="padding-top:13px">&nbsp;Username</label>
+			<input class="form-content"
 			    type="text" name="username" />
 			<div class="form-border"></div>
 			<label for="user-password" style="padding-top:22px">&nbsp;Password</label>

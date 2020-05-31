@@ -19,7 +19,8 @@ class CreateAntrianTable extends Migration
             $table->string('nama_pasien');
             $table->integer('id_poli')->unsigned();
             $table->foreign('id_poli')->references('id_poli')->on('poli');
-            //$table->timestamps();
+            $table->integer('id_dokter')->unsigned()->nullable();
+            $table->foreign('id_dokter')->references('id_dokter')->on('dokter');
         });
     }
 

@@ -18,6 +18,9 @@ class CreatePasienTable extends Migration
             $table->string('username');
             $table->string('nama_pasien');
             $table->string('alamat');
+            $table->string('jk');
+            $table->integer('umur');
+            $table->string('no_telp');
             $table->string('password');
             //$table->timestamps();
         });
