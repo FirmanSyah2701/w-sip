@@ -11,5 +11,22 @@ class Poli extends Model
     protected $fillable = [
         'id_poli', 'nama_poli'    
     ];
+
+    public $timestamps = false;
     
+    public function dokter(){
+        return $this->belongsTo('App\Dokter', 'id_poli');
+    }
+    
+    public function antrian(){
+        return $this->hasOne('App\Antrian', 'id_poli');
+    }
+
+    public function konsul(){
+        return $this->belongsTo('App\Konsul', 'id_poli');
+    }
+
+    public function rekam_medis(){
+        return $this->hasOne('App\RekamMedis', 'id_poli');
+    }
 }

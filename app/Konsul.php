@@ -15,10 +15,10 @@ class Konsul extends Model
     public $timestamps = false;
 
     public function dokter(){
-        return $this->belongsTo('App\Dokter', 'id_dokter');
+        return $this->hasOne('App\Dokter', 'id_dokter');
     }
 
     public function poli(){
-        return $this->belongsTo('App\Poli', 'id_poli');
+        return $this->hasOne('App\Poli', 'id_poli');
     }
 }

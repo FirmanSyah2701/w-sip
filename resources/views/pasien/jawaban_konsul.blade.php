@@ -38,7 +38,7 @@
                         <strong class="card-title">Jawaban Konsultasi</strong>
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover table-bordered">
+                        <table id="bootstrap-data-table" class="table table-hover table-bordered">
                             <thead class="thead-primary">
                                 <tr>
                                     <th>No</th>
@@ -48,6 +48,15 @@
                                     <th>Jawaban</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $konsul->poli->nama_poli }}</td>
+                                    <td>{{ $konsul->dokter->nama_dokter }}</td>
+                                    <td>{{ $konsul->konsul_pasien }}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

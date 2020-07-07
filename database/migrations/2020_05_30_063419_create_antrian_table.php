@@ -17,6 +17,11 @@ class CreateAntrianTable extends Migration
             $table->increments('id_antrian');
             $table->integer('no_antrian')->nullable();
             $table->string('nama_pasien');
+            $table->date('tanggal');
+            $table->string('jk', 20);
+            $table->integer('umur')->length(3);
+            $table->string('no_telp', 15);
+            $table->integer('status');
             $table->integer('id_poli')->unsigned();
             $table->foreign('id_poli')->references('id_poli')->on('poli');
             $table->integer('id_dokter')->unsigned()->nullable();

@@ -15,14 +15,14 @@ class CreatePasienTable extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->increments('id_pasien');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('nama_pasien');
-            $table->string('alamat');
+            $table->text('alamat');
             $table->string('jk');
             $table->integer('umur');
             $table->string('no_telp');
             $table->string('password');
-            //$table->timestamps();
+            $table->string('foto')->nullable();
         });
     }
 

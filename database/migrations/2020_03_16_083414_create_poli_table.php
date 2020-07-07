@@ -14,8 +14,8 @@ class CreatePoliTable extends Migration
     public function up()
     {
         Schema::create('poli', function (Blueprint $table) {
-            $table->increments('id_poli', 2);
-            $table->string('nama_poli', 80);
+            $table->increments('id_poli', 4);
+            $table->string('nama_poli', 100);
         });
     }
 

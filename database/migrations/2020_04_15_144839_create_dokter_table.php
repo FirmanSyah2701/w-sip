@@ -15,13 +15,14 @@ class CreateDokterTable extends Migration
     {
         Schema::create('dokter', function (Blueprint $table) {
             $table->increments('id_dokter', 12);
+            $table->string('username', 50);
             $table->string('nama_dokter', 100);
             $table->integer('id_poli')->unsigned();
             $table->foreign('id_poli')->references('id_poli')->on('poli');
             $table->string('jk');
             $table->string('no_telp');
-            $table->string('alamat');
-            $table->string('foto');
+            $table->text('alamat');
+            $table->string('foto')->nullable();
             $table->string('password');
         });
     }

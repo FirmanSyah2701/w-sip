@@ -19,7 +19,8 @@ class Pasien extends Authenticatable
         'umur', 
         'no_telp', 
         'alamat', 
-        'password'
+        'password',
+        'foto'
     ];
 
     protected $hidden = [
@@ -32,5 +33,9 @@ class Pasien extends Authenticatable
     
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function rekam_medis(){
+        return $this->hasOne('App\RekamMedis', 'id_pasien');
     }
 }

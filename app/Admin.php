@@ -12,14 +12,16 @@ class Admin extends Authenticatable
     protected $table = 'admin';
     
     protected $fillable = [
-        'id_admin', 'username', 'name', 'password',
+        'id_admin', 'username', 'nama', 'password',
     ];
 
-    protected $primaryKey = 'id_admin';
-    
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $primaryKey = 'id_admin';
+
+    public $timestamps = false;
 
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);

@@ -9,7 +9,16 @@ class Antrian extends Model
     protected $table = 'antrian';
     protected $primaryKey = 'id_antrian';
     protected $fillable = [
-        'id_antrian', 'no_antrian', 'nama_pasien', 'id_poli', 'id_dokter'
+        'id_antrian', 
+        'no_antrian', 
+        'tanggal', 
+        'nama_pasien', 
+        'jk', 
+        'umur', 
+        'no_telp', 
+        'id_poli', 
+        'id_dokter', 
+        'status'
     ];
     
     public $timestamps = false;
@@ -19,6 +28,6 @@ class Antrian extends Model
     }
 
     public function dokter(){
-        return $this->belongsTo('App\Dokter', 'id_dokter');
+        return $this->hasOne('App\Dokter', 'id_dokter');
     }
 }

@@ -37,23 +37,24 @@
                         <strong class="card-title">Form Ambil Antrian</strong>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('ambilAntrianPost') }}" method="POST">
+                        <form id="frmAntrian" action="{{ route('antrianPost') }}" method="POST" role="form">
                             @csrf
                             <div class="col-md-12">
-                                <input type="hidden" name="nama_pasien" value="{{ Session::get('nama_pasien') }}">
-                                <label for="">Kategori Konsultasi</label>
-                                <select name="id_poli" class="form-control">
-                                    <option value="" selected disabled>Pilih kategori</option>
-                                    @foreach ($poli as $data)
-                                        <option value="{{ $data->id_poli }}">{{ $data->nama_poli }}</option>
+                                <label for="">Poli</label>
+                                <select id="id_dokter" name="id_dokter" class="form-control">
+                                    <option value="" selected disabled>Pilih poli dan dokter</option>
+                                    @foreach ($dataDokter as $dokter)
+                                        <option value="{{ $dokter->id_dokter }}">
+                                            {{ $dokter->poli->nama_poli }} - {{ $dokter->nama_dokter }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="col-md-12">
                                 <div style="margin-top:20px;"></div>
-                                <button class="btn btn-primary" type="submit">Ok</button>
-                                <a class="btn btn-danger" href="{{url('/')}}">Cancel</a>
+                                <button class="btn btn-primary" name="pasien" type="submit">Ok</button>
+                                <a class="btn btn-danger" href="{{ route('profilePasien') }}">Cancel</a>
                             </div>
                         </form>
                     </div>

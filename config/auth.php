@@ -38,23 +38,28 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
+            'provider' => 'users',
+        ],
+        
+        'pasien' => [
+            'driver' => 'session',
             'provider' => 'pasien',
+        ],
+
+        'admin' => [
+            'driver'   => 'session',
+            'provider' => 'admin',
+        ],
+        
+        'dokter' => [
+            'driver'   => 'session',
+            'provider' => 'dokter',
         ],
 
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
-        ],
-
-        'admin' => [
-            'driver'    => 'session',
-            'providers' => 'admin',
-        ],
-        
-        'pasien' => [
-            'driver' => 'session',
-            'provider' => 'pasien',
         ],
     ],
 
@@ -81,16 +86,20 @@ return [
             'model' => App\User::class,
         ],
 
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Admin::class,
-        ],
-
         'pasien' => [
             'driver' => 'eloquent',
             'model' => App\Pasien::class,
         ],
 
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
+        'dokter' => [
+            'driver' => 'eloquent',
+            'model' => App\Dokter::class,
+        ]
     ],
 
     /*
