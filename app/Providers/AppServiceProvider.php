@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('id');
 
         Blade::directive('date', function ($param) {
-            return "<?= \Carbon\Carbon::parse($param)->translatedFormat('l,d F Y'); ?>";
+            return "<?= \Carbon\Carbon::parse($param)->translatedFormat('l, d F Y'); ?>";
         });
     }
 }

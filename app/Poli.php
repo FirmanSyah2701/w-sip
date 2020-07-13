@@ -15,7 +15,7 @@ class Poli extends Model
     public $timestamps = false;
     
     public function dokter(){
-        return $this->belongsTo('App\Dokter', 'id_poli');
+        return $this->hasOne('App\Dokter', 'id_poli');
     }
     
     public function antrian(){

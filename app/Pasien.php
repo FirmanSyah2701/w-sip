@@ -38,4 +38,8 @@ class Pasien extends Authenticatable
     public function rekam_medis(){
         return $this->hasOne('App\RekamMedis', 'id_pasien');
     }
+
+    public function konsul(){
+        return $this->belongsTo('App\Konsul', 'id_pasien');
+    }
 }

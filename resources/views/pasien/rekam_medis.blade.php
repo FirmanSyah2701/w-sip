@@ -8,27 +8,6 @@
 
 @section('content')
 
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Rekam Medis</a></li>
-                    <li class="active">Rekam Medis</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -55,7 +34,7 @@
                                     <td> {{ $data->poli->nama_poli }} </td>
                                     <td> {{ $data->dokter->nama_dokter }} </td>
                                     <td> {{ $data->keterangan }} </td>
-                                    <td> {{ $data->tanggal_berobat }} </td>
+                                    <td> @date($data->tanggal_berobat) </td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -7,27 +7,6 @@
 @endsection
 
 @section('content')
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Daftar berobat</a></li>
-                    <li class="active">Ambil antrian</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -41,7 +20,9 @@
                         <p style="font-weight:bold">Nomer Urut Antrian: 
                             {{ $antrian->no_antrian ? $antrian->no_antrian : "Tunggu konfirmasi"  }} 
                         </p>
-                        <p style="font-weight:bold">Kategori: {{ $antrian->poli->nama_poli }}</p>
+                        <p style="font-weight:bold">Poli: {{ $antrian->poli->nama_poli }}</p>
+                        <p style="font-weight:bold">Dokter: {{ $antrian->dokter->nama_dokter }}</p>
+                        <p style="font-weight:bold">Tanggal: @date($antrian->tanggal)</p>
                     </div>
                 </div>
             </div>

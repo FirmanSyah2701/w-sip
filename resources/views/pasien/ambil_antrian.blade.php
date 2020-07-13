@@ -7,26 +7,6 @@
 @endsection
 
 @section('content')
-<div class="breadcrumbs">
-    <div class="col-sm-4">
-        <div class="page-header float-left">
-            <div class="page-title">
-                <h1>Dashboard</h1>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="page-header float-right">
-            <div class="page-title">
-                <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Daftar berobat</a></li>
-                    <li class="active">Ambil antrian</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -34,7 +14,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Form Ambil Antrian</strong>
+                        <strong class="card-title">Form Pesan Antrian</strong>
                     </div>
                     <div class="card-body">
                         <form id="frmAntrian" action="{{ route('antrianPost') }}" method="POST" role="form">
@@ -50,11 +30,17 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-md-12">
+                                <label style="margin-top: 10px;">Tanggal</label>
+                                <input type="date" name="tanggal" id="tanggal" 
+                                    class="form-control" min="{{ $now }}">
+                            </div>
 
                             <div class="col-md-12">
                                 <div style="margin-top:20px;"></div>
-                                <button class="btn btn-primary" name="pasien" type="submit">Ok</button>
-                                <a class="btn btn-danger" href="{{ route('profilePasien') }}">Cancel</a>
+                                <button class="btn btn-primary" name="pasien" type="submit">
+                                    Pesan sekarang
+                                </button>
                             </div>
                         </form>
                     </div>

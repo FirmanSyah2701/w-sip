@@ -119,7 +119,9 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
+                                    <li>
+                                        <a href="{{ url('dokter/DashboardDokter') }}">Dashboard</a>
+                                    </li>
                                     <li class="active">Data Medis Pasien</li>
                                 </ol>
                             </div>
@@ -167,7 +169,7 @@
                                                 <td>{{$data->pasien->alamat}}</td>
                                                 <td>{{$data->poli->nama_poli}}</td>
                                                 <td>{{$data->keterangan}}</td>
-                                                <td>{{$data->tanggal_berobat}}</td>
+                                                <td>@date($data->tanggal_berobat)</td>
                                                 <td>
                                                     <div>
                                                         <a href="{{ url('dokter/LihatRekamMedis'.$data->id_rekam_medis) }}"

@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -46,6 +48,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException){
+            return redirect()->back()->withErrors(['foto' => 'Ukuran file tidak boleh lebih dari 2MB']);
+    }
+         return parent::render($request, $exception);
     }
 }

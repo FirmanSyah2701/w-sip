@@ -136,7 +136,11 @@
                             <div class="page-header float-right">
                                 <div class="page-title">
                                     <ol class="breadcrumb text-right">
-                                        <li>Dashboard</a></li>
+                                        <li>
+                                            <a href="{{ url('admin/DashboardAdmin') }}">
+                                                Dashboard
+                                            </a>
+                                        </li>
                                         <li class="active">Blog</li>
                                     </ol>
                                 </div>
@@ -179,8 +183,9 @@
                                                 <tr>
                                                     <td>{{$no++}}</td>       
                                                     <td>
-                                                        <img class="mx-auto d-block img-responsive" width="260px" 
-                                                            height="200px" src="{{ url('/assets/img/uploads/'.$blog->foto) }}" 
+                                                        <img class="mx-auto d-block img-responsive" 
+                                                            width="260px" height="200px" 
+                                                            src="{{ url('/assets/img/uploads/'.$blog->foto) }}" 
                                                             alt="blog">
                                                     </td>
                                                     <td>{{ $blog->judul }}</td>

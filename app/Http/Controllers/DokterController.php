@@ -2,30 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Dokter;
-use App\Pasien;
 use App\Poli;
-use App\RekamMedis;
+use App\Pasien;
+use App\Dokter;
 use App\Konsul;
+use App\RekamMedis;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
 
 class DokterController extends Controller
 {
-    public function index(Request $request){
-    	if(!$request->session()->exists('admin')){
-            alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
-            return redirect('/admin/loginAdmin');
-        } else {
-            $poli = Poli::all();  
-    		return view('admin/dataDokter', compact('poli'));
-    	}
-    }
-
-    public function tambah(Request $request) {
-        if(!$request->session()->exists('admin')){
+    public function tambah() {
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
@@ -35,31 +24,45 @@ class DokterController extends Controller
     }
 
     public function store(Request $request) {
-
         $request->validate([
-            'foto'          => 'file|image|mimes:jpeg,png,jpg|max:2048',
-            'username'      => 'required|string|max:50|unique:dokter',
-            'nama_dokter'   => 'required',
+            'foto'          => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'username'      => 'required|alpha_num|max:50|unique:dokter,username',
+            'nama_dokter'   => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/',
             'id_poli'       => 'required',
-            'jk'            => 'required',
-            'no_telp'       => 'required', 
+            'jk'            => 'required|in:laki-laki,perempuan',
+            'no_telp'       => 'required|string|min:10|max:15|regex:/^[0-9]*$/', 
             'alamat'        => 'required', 
-            'password'      => 'required'
+            'password'      => 'required|alpha_num|min:8|max:50'
         ],
         [
-            'nama_dokter.required'  => 'Nama Dokter Belum Diisi',
+            'foto.required'         => 'Foto harus diisi',
+            'foto.uploaded'         => 'Ukuran file tidak boleh lebih dari 2MB!',
+            'nama_dokter.required'  => 'Nama dokter Belum Diisi',
+            'nama_dokter.regex'     => 'Format nama dokter menggunakan huruf dan spasi',
+            'nama_dokter.max'       => 'Nama dokter maksimal 100 karakter',
             'username.required'     => 'username belum diisi',
-            'id_poli.required'      => 'Poli Belum Diisi',
-            'jk.required'           => 'Jenis Kelamin Belum Diisi',
-            'no_telp.required'      => 'Nomor HP Belum Diisi', 
-            'alamat.required'       => 'Alamat Belum Diisi',
-            'password.required'     => 'Password Belum Diisi'
+            'username.unique'       => 'Akun sudah terdaftar',
+            'username.alpha_num'    => 'Format username berupa huruf atau angka 
+                                        dan tidak boleh menggunakan spasi',
+            'id_poli.required'      => 'Poli belum diisi',
+            'jk.required'           => 'Jenis kelamin belum diisi',
+            'jk.in'                 => 'Jenis kelamin hanya boleh antara laki-laki atau perempuan',
+            'no_telp.required'      => 'Nomor hp belum diisi',
+            'no_telp.regex'         => 'Format nomer hp harus berupa bilangan bulat',
+            'no_telp.min'           => 'batas nomer telpon minimal 10 digit',
+            'no_telp.max'           => 'batas nomer telpon maksimal 15 digit',
+            'alamat.required'       => 'Alamat belum diisi',
+            'password.required'     => 'Password belum diisi',
+            'password.alpha_num'    => 'Format password berupa huruf atau angka 
+                                        dan tidak boleh menggunakan spasi',
+            'password.min'          => 'Password minimal 8 karakter',
+            'password.max'          => 'Password maksimal 50 karakter'
         ]);
 
-        $file = $request->file('foto');
-        $nama_file = time()."_".$file->getClientOriginalName();
-        $tujuan_upload = 'assets/img/dokter';
-        $file -> move($tujuan_upload,$nama_file);
+        $file           = $request->file('foto');
+        $nama_file      = time()."_".$file->getClientOriginalName();
+        $tujuan_upload  = 'assets/img/dokter';
+        $file->move($tujuan_upload,$nama_file);
 
         $data              = new Dokter();
         $data->foto        = $nama_file;
@@ -75,8 +78,8 @@ class DokterController extends Controller
         alert()->success('Data Dokter Sudah Ditambahkan', 'Berhasil');
         return redirect('/admin/dataDokter');
     }
-    public  function tampil_data(Request $request){
-        if(!$request->session()->exists('admin')){
+    public function dataDokter(){
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
@@ -86,10 +89,10 @@ class DokterController extends Controller
         }
     }
 
-    public function ubah(Request $request, $id) {
-        if(!$request->session()->exists('admin')){
+    public function ubah($id) {
+        if(!session()->exists('dokter')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
-            return redirect('/admin/loginAdmin');
+            return redirect('dokter/loginDokter');
         }else{
             $datas = Dokter::find($id);
             $poli  = Poli::all();    
@@ -99,31 +102,33 @@ class DokterController extends Controller
 
     public function update($id, Request $request) {
         $request->validate([
-            'foto'          => 'file|image|mimes:jpeg,png,jpg|max:2048',
-            'nama_dokter'   => 'required',
-            'username'      => 'required',
-            'jk'            => 'required',
-            'no_telp'       => 'required', 
-            'alamat'        => 'required',       
-            'password'      => 'required',       
+            'foto'          => 'image|mimes:jpeg,png,jpg|max:2048',
+            'username'      => 'required|string|max:50|unique:dokter|regex:/^[a-zA0-9]*$/',
+            'nama_dokter'   => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/',
+            'id_poli'       => 'required',
+            'no_telp'       => 'required|string|min:10|max:15|regex:/^[0-9]*$/', 
+            'alamat'        => 'required', 
         ],
         [
+            'foto.uploaded'         => 'Ukuran file tidak boleh lebih dari 2MB!',
             'nama_dokter.required'  => 'Nama Dokter Belum Diisi',
-            'username.requird'      => 'username belum diisi',
-            'jk.required'           => 'Jenis Kelamin Belum Diisi',
-            'no_telp.required'      => 'Nomor HP Belum Diisi', 
-            'alamat.required'       => 'Alamat Belum Diisi', 
-            'password.required'     => 'Password Belum Diisi'
+            'username.required'     => 'username belum diisi',
+            'username.unique'       => 'Akun sudah terdaftar',
+            'username.regex'        => 'Format username berupa huruf atau angka 
+                                        dan tidak boleh menggunakan spasi',
+            'id_poli.required'      => 'Poli Belum Diisi',
+            'no_telp.required'      => 'Nomor HP Belum Diisi',
+            'no_telp.regex'         => 'Format nomer hp harus berupa bilangan bulat',
+            'no_telp.min'           => 'batas nomer telpon minimal 10 digit',
+            'no_telp.min'           => 'batas nomer telpon maksimal 15 digit',
+            'alamat.required'       => 'Alamat Belum Diisi',
         ]);
-
 
         $data = Dokter::find($id);
         $data->nama_dokter  = $request->nama_dokter;
         $data->username     = $request->username;
-        $data->jk           = $request->jk;
         $data->no_telp      = $request->no_telp;
         $data->alamat       = $request->alamat;
-        $data->password     = $request->password;
         if (empty($request->foto)){
             $data->foto = $data->foto;
         }
@@ -139,25 +144,8 @@ class DokterController extends Controller
         return redirect('admin/dataDokter');
     }
 
-    public function delete($id) {
-        $datas = Dokter::find($id);
-        $datas->delete();
-        alert()->warning('Data Dokter Sudah Dihapus', 'Hapus');
-        return redirect('/admin/dataDokter');
-    }
-
-    public function dashboard(){
+    public function dashboardDokter(){
         if(!session()->exists('dokter')){
-            alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
-            return redirect('/dokter/loginDokter');
-        }
-        else{
-            return view('/dokter/DashboardDokter');
-        }
-    }
-
-    public function data(Request $request){
-        if(!$request->session()->exists('dokter')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/dokter/loginDokter');
         }else{
@@ -168,11 +156,14 @@ class DokterController extends Controller
     }
 
     public function loginDokter(){
-        return view('dokter.loginDokter');
+        if(session()->exists('dokter')){
+            return redirect()->back();
+        }else{
+            return view('dokter.loginDokter');
+        }
     }
 
     public function loginDokterPost(Request $request){
-
         $auth = auth()->guard('dokter');
 
         $credentials = [
@@ -196,9 +187,10 @@ class DokterController extends Controller
         }else{
             if($auth->attempt($credentials)){
                 $dokter  = Dokter::where('username', $request->username)->first();
+                
                 session()->put('dokter', $dokter->id_dokter);
                 session()->put('nama_dokter', $dokter->nama_dokter);
-
+                session()->put('jk_dokter', $dokter->jk);
                 $konsul  = Konsul::where('id_dokter', $dokter->id_dokter)->count();
                 $medis   = RekamMedis::where('id_dokter', $dokter->id_dokter)->count(); 
                 return view('dokter.DashboardDokter', compact('konsul', 'medis'));
@@ -214,46 +206,8 @@ class DokterController extends Controller
     }
 
     public function logoutDokter(){
-        Session::flush();
+        session()->forget('dokter');
         alert()->info('Anda Sudah Logout', 'Logout');
         return redirect('/dokter/loginDokter');
-    }
-
-    public function registerDokter(Request $request){
-        return view('/dokter/registerDokter');
-    }
-
-    public function registerDokterPost(Request $request){
-        $this->validate($request, [
-            'nama_dokter' => 'required|min:4',
-            'username' => 'required|min:4',
-            'password' => 'required',
-            'confirmation' => 'required|same:password',
-            
-        ]);
-
-        $data =  new Dokter();
-        $data->nama_dokter = $request->nama_dokter;
-        $data->username    = $request->username;
-        $data->jk          = $request->jk;
-        $data->umur        = $request->umur;
-        $data->no_telp     = $request->no_telp;
-        $data->id_poli     = $request->id_poli;
-        $data->password    = $request->password;
-        
-        $data->save();
-        return redirect('/dokter/loginDokter')->with('alert-success','Kamu berhasil Register');
-    }
-
-    public function datapasien(Request $request){
-        if(!$request->session()->exists('dokter')){
-            alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
-            return redirect('/dokter/loginDokter');
-        }else{
-            $datas          = Dokter::all();  
-            $pasien         = Pasien::all();
-            $rekam_medis    = RekamMedis::all();       
-            return view('dokter/dataDiriPasien',compact('datas','pasien','rekam_medis'));    
-        } 
     }
 }

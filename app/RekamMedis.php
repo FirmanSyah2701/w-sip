@@ -9,7 +9,12 @@ class RekamMedis extends Model
     protected $table = 'rekam_medis';
     protected $primaryKey = 'id_rekam_medis';
     protected $fillable = [
-        'id_rekam_medis', 'id_pasien', 'id_dokter', 'id_poli', 'tanggal_berobat', 'keterangan'
+        'id_rekam_medis', 
+        'id_pasien', 
+        'id_dokter', 
+        'id_poli', 
+        'tanggal_berobat', 
+        'keterangan'
     ];
 
     public $timestamps = false;

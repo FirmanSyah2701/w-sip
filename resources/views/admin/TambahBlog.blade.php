@@ -141,8 +141,17 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Blog</a></li>
+                                    <li>
+                                    <a href="{{ url('admin/DashboardAdmin') }}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('admin/blog_admin') }}">
+                                        Blog
+                                        </a>
+                                    </li>
+                                    <li class="active">Tambah Blog</li>
                                 </ol>
                             </div>
                         </div>
@@ -156,7 +165,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Tambah</strong> Data Dokter
+                            <strong>Tambah</strong> Blog Kegiatan
                         </div>
                         
                         <div class="card-body card-block">
@@ -178,10 +187,11 @@
                                 {{csrf_field()}}
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="file-input" class=" form-control-label">Gambar</label>
+                                        <label for="file-input" class="form-control-label">Foto</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="file" id="gambar" name="foto" class="form-control-file">
+                                        <input type="file" id="foto" name="foto" class="form-control-file">
+                                        <small class="form-text text-muted">JPG|JPEG|PNG Max 2MB</small>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -200,15 +210,6 @@
                                     <div class="col-12 col-md-9">
                                         <textarea id="keterangan" name="keterangan" 
                                             placeholder="Masukan Keterangan Lengkap" class="form-control"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Tanggal</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <input type="date" id="tanggal" name="tanggal" class="form-control">
                                     </div>
                                 </div>
                                 

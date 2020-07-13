@@ -2,51 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\RekamMedis;
 use App\Dokter;
 use App\Pasien;
+use App\RekamMedis;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
 class RekamMedisController extends Controller
 {
-     public function showMedisById(Request $request){
-        if(!$request->session()->exists('pasien')){
+     public function showMedisByPatient(){
+        if(!session()->exists('pasien')){
             return redirect()->route('loginPasien');
         }else{
-            $rMedis = RekamMedis::whereIdPasien(session('pasien'))->get();
+            $rMedis = RekamMedis::where('id_pasien', session('pasien'))->get();
             return view('pasien.rekam_medis', compact('rMedis'))->with('i');
         }
     }
 
-    public function index(Request $request){
-    	if(!$request->session()->exists('admin')){
-            alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
-            return redirect('/admin/loginAdmin');
-        } else {
-            $medis = RekamMedis::all();
-    		return view('admin.rekamMedis', compact('medis'));
-    	}
-    }
-
-    public function tambah(Request $request) {
-        if(!$request->session()->exists('admin')){
+    public function tambah() {
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
             $dokter = Dokter::all();
             $pasien = Pasien::all();
-            return view('admin/TambahRekamMedis', compact('dokter','pasien'));
+            $now    = Carbon::today()->toDateString();
+            return view('admin.TambahRekamMedis', compact('now','dokter','pasien'));
         }
     }
 
     public function store(Request $request) {
         $request->validate([
             'id_dokter'          => 'required',
-            'tanggal_berobat'    => 'required',
+            'tanggal_berobat'    => 'required|date|before:tomorrow',
             'id_pasien'          => 'required', 
-            'keterangan'         => 'required'
-        ]);
+            'keterangan'         => 'required|string'
+        ],
+        [
+            'id_dokter.required'        => 'Poli dan dokter harus diisi',
+            'tanggal_berobat.required'  => 'Tanggal harus diisi',
+            'tanggal_berobat.before'    => 'Tanggal tidak boleh diisi hari ini atau seterusnya',
+            'id_pasien.required'        => 'Nama pasien harus diisi',
+            'keterangan.required'       => 'Keterangan harus diisi'
+        ]); 
 
         $poli = Dokter::where('id_dokter', $request->id_dokter)->value('id_poli');
         $data = new RekamMedis();
@@ -59,7 +58,7 @@ class RekamMedisController extends Controller
         alert()->success('Data Rekam Medis Berhasil Ditambah', 'Berhasil!');
         return redirect('admin/rekamMedis');
     }
-    public  function tampil_data(Request $request){
+    public function dataMedis(Request $request){
         if(!$request->session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
@@ -77,14 +76,23 @@ class RekamMedisController extends Controller
             $datas = RekamMedis::find($id_rekam_medis);
             $dokter = Dokter::all();
             $pasien = Pasien::all();
-        return view('admin/UbahRekamMedis',compact('datas','dokter','pasien'));
+            return view('admin/UbahRekamMedis',compact('datas','dokter','pasien'));
         }
     }
 
     public function update($id_rekam_medis, Request $request) {
-        $this->validate($request, [
-            'tanggal_berobat'  => 'required',
-            'keterangan'       => 'required',
+        $request->validate([
+            'id_dokter'          => 'required',
+            'tanggal_berobat'    => 'required|date|before:tomorrow',
+            'id_pasien'          => 'required', 
+            'keterangan'         => 'required|string'
+        ],
+        [
+            'id_dokter.required'        => 'Poli dan dokter harus diisi',
+            'tanggal_berobat.required'  => 'Tanggal harus diisi',
+            'tanggal_berobat.before'    => 'Tanggal tidak boleh diisi hari ini atau seterusnya',
+            'id_pasien.required'        => 'Nama pasien harus diisi',
+            'keterangan.required'       => 'Keterangan harus diisi'
         ]);
 
         $poli = Dokter::where('id_dokter', $request->id_dokter)->value('id_poli');
@@ -108,8 +116,8 @@ class RekamMedisController extends Controller
         return redirect('admin/rekamMedis');
     }
 
-    public  function dataMedispasien(Request $request){
-        if(!$request->session()->exists('dokter')){
+    public function dataMedisbyDokter(){
+        if(!session()->exists('dokter')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/dokter/loginDokter');
         }else{
@@ -119,13 +127,13 @@ class RekamMedisController extends Controller
         } 
     }
 
-    public function lihatRekamMedis(Request $request, $id_rekam_medis) {
-        if(!$request->session()->exists('dokter')){
+    public function lihatRekamMedis($id_rekam_medis) {
+        if(!session()->exists('dokter')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/dokter/loginDokter');
         }else{
             $datas = RekamMedis::find($id_rekam_medis);
-            return view('dokter/LihatRekamMedis',compact('datas'));
+            return view('dokter.LihatRekamMedis',compact('datas'));
         }
     }
 }

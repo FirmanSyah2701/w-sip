@@ -178,7 +178,9 @@
                                 </div>
                             @endif
 
-                            <form action="{{url('AksiUbahDataDokter', $datas->id_dokter) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="{{url('AksiUbahDataDokter', $datas->id_dokter) }}" method="post" 
+                                enctype="multipart/form-data" class="form-horizontal">
+                                
                                 {{csrf_field()}}
                                 {{method_field('PUT')}}
                                 <div class="row form-group">
@@ -186,8 +188,11 @@
                                         <label for="text-input" class="form-control-label">Foto</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <img src="{{ url('assets/img/dokter/'.$datas->foto) }}" style="width: 200px;">
-                                        <input type="file" id="foto" name="foto" class="form-control-file mt-3">
+                                        <img src="{{ url('assets/img/dokter/'.$datas->foto) }}" 
+                                            style="width: 200px;">
+                                        <input type="file" id="foto" name="foto" 
+                                            class="form-control-file mt-3">
+                                        <small class="form-text text-muted">JPG|JPEG|PNG Max 2MB</small>
                                     </div>
                                 </div>
                                 <div class="row form-group">

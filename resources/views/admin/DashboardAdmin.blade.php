@@ -107,12 +107,6 @@
                                 </a>
 
                                 <div class="user-menu dropdown-menu">
-                                <!-- <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                                    <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                                    <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a> -->
-
                                     <a class="nav-link" href="/logoutAdmin"><i class="fa fa-power-off"></i>Logout</a>
                                 </div>
                             </div>
@@ -193,26 +187,6 @@
                         <!--/.col-->
 
                         <div class="col-sm-6 col-lg-3">
-                        <a href="{{url ('admin/blog_admin')}}">
-                            <div class="card text-white bg-flat-color-2">
-                                <div class="card-body">
-                                    <div class="card-left pt-1 float-left">
-                                        <h3 class="mb-0 fw-r">
-                                            <span class="count">{{ $blog }}</span>
-                                        </h3>
-                                        <p class="text-light mt-1 m-0">Data Blog Kegiatan</p>
-                                    </div><!-- /.card-left -->
-
-                                    <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-browser"></i>
-                                    </div><!-- /.card-right -->
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-lg-3">
                             <a href="{{url ('admin/poli')}}">
                             <div class="card text-white bg-flat-color-4">
                                 <div class="card-body">
@@ -234,25 +208,24 @@
                         <!--/.col-->
 
                         <div class="col-sm-6 col-lg-3">
-                        <a href="{{url ('admin/dataAdmin')}}">
-                            <div class="card text-white bg-flat-color-5">
+                        <a href="{{url ('admin/blog_admin')}}">
+                            <div class="card text-white bg-flat-color-2">
                                 <div class="card-body">
                                     <div class="card-left pt-1 float-left">
                                         <h3 class="mb-0 fw-r">
-                                            <span class="count">{{ $admin }}</span>
+                                            <span class="count">{{ $blog }}</span>
                                         </h3>
-                                        <p class="text-light mt-1 m-0">Data Admin</p>
+                                        <p class="text-light mt-1 m-0">Data Blog Kegiatan</p>
                                     </div><!-- /.card-left -->
 
                                     <div class="card-right float-right text-right">
-                                        <i class="icon fade-5 icon-lg pe-7s-users"></i>
+                                    <i class="icon fade-5 icon-lg pe-7s-browser"></i>
                                     </div><!-- /.card-right -->
 
                                 </div>
 
                             </div>
                         </div>
-                        <!--/.col-->
                     
                     <!--  /Traffic -->
                     <div class="clearfix"></div>

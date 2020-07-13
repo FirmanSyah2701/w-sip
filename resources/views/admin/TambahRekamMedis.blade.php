@@ -197,16 +197,16 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="email-input" class=" form-control-label">Tanggal</label>
+                                        <label for="email-input" class="form-control-label">Tanggal</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="tanggal" name="tanggal_berobat" 
-                                            class="form-control">
+                                        <input type="date" max="{{ $now }}" id="tanggal" 
+                                            name="tanggal_berobat" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="select" class=" form-control-label">Nama Pasien</label>
+                                        <label for="select" class="form-control-label">Nama Pasien</label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <select name="id_pasien" id="select" class="form-control">

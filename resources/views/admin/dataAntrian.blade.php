@@ -12,7 +12,6 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
@@ -144,7 +143,7 @@
                             <div class="page-header float-right">
                                 <div class="page-title">
                                     <ol class="breadcrumb text-right">
-                                        <li>Dashboard</a></li>
+                                        <li> <a href="{{ url('admin/DashboardAdmin') }}">Dashboard</a></li>
                                         <li class="active">Data Antrian</li>
                                     </ol>
                                 </div>
@@ -172,7 +171,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Poli</th>
+                                                <th width="150px">Poli</th>
                                                 <th>Nama Pasien</th>
                                                 <th>Tanggal Antrian</th>
                                                 <th>No Antrian</th>
@@ -188,7 +187,10 @@
                                             @foreach($antrian as $data)
                                                 <tr>
                                                     <td>{{$no++}}</td>
-                                                    <td>{{$data->poli->nama_poli}}</td>
+                                                    <td>
+                                                        {{$data->dokter->nama_dokter}} - 
+                                                        {{ $data->dokter->poli->nama_poli }}
+                                                    </td>
                                                     <td>{{$data->nama_pasien}}</td>
                                                     <td>@date($data->tanggal)</td>
                                                     
@@ -217,7 +219,7 @@
                                                             <p>
                                                         
                                                             @if($data->status == 1)
-                                                                <a href="{{ url ('admin/detailDataAntrian'.$data->id_antrian) }}" 
+                                                                <a href="{{ url('admin/detailDataAntrian'.$data->id_antrian) }}" 
                                                                     class="btn btn-info btn-sm" title="Lihat">
                                                                     <i class="fas fa-eye"></i> Lihat
                                                                 </a>

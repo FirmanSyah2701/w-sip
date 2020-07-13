@@ -14,6 +14,10 @@ class Konsul extends Model
 
     public $timestamps = false;
 
+    public function pasien(){
+        return $this->hasOne('App\Pasien', 'id_pasien');
+    }
+
     public function dokter(){
         return $this->hasOne('App\Dokter', 'id_dokter');
     }

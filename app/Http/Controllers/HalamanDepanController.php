@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dokter;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HalamanDepanController extends Controller
@@ -15,6 +16,7 @@ class HalamanDepanController extends Controller
 
     public function showPesanAntrian(){
         $dokter = Dokter::all();
-        return view('layouts.pesan_antrian', compact('dokter'));
+        $now    = Carbon::today()->toDateString();
+        return view('layouts.pesan_antrian', compact('dokter', 'now'));
     }
 }

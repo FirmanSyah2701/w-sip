@@ -185,23 +185,40 @@
                                             <label for="text-input" class=" form-control-label">Nama Poli</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" placeholder="Masukan Nama Pasien" 
-                                                class="form-control" value="{{$datas->poli->nama_poli}}" ReadOnly>
-                                            </div>
+                                            <input type="text" class="form-control" 
+                                                value="{{$datas->poli->nama_poli}}" ReadOnly>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="text-input" class=" form-control-label">Nama Pasien</label>
+                                            <label for="text-input" class="form-control-label">Jenis Kelamin</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text"  placeholder="Masukan Nama Pasien" 
-                                                class="form-control" value="{{$datas->pasien->nama_pasien}}" ReadOnly>
+                                            <input type="text" class="form-control" 
+                                                value="{{$datas->jk}}" ReadOnly>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="email-input" class=" form-control-label">Tanggal</label>
+                                            <label for="text-input" class="form-control-label">Usia</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" class="form-control" 
+                                                value="{{$datas->umur}}" ReadOnly>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class="form-control-label">No HP</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" class="form-control" 
+                                                value="{{$datas->no_telp}}" ReadOnly>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="email-input" class="form-control-label">Tanggal</label>
                                         </div>
                                         <div class="col-12 col-md-9">
                                             <input type="date" id="tanggal_antrian" name="tanggal_antrian" 
@@ -219,7 +236,7 @@
                                     </div>
 
                                     <div class="card-body">  
-                                        <a href="{{url ('admin/dataAntrian')}}" class="btn btn-danger btn-sm">
+                                        <a href="{{url('admin/dataAntrian')}}" class="btn btn-danger btn-sm">
                                             <i class="fa fa-arrow-left"></i> Kembali
                                         </a>
                                     </div>

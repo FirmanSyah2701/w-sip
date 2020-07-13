@@ -95,10 +95,16 @@
                             <div class="card-body">
                                     <h5 class="card-title">{{$blog->judul}}</h5>
                                 <ul>
-                                    <li> <span class="ti-calendar"></span>{{ \Carbon\Carbon::parse($blog->tanggal)->translatedFormat('l,d F Y') }}</li><br>
-                                    <center>
-                                        <li> <span ><a href="{{ url('/detail_blog/'.$blog->slug)}}" style="color : blue">Selengkapnya...</a></span></li>
-                                    </center>
+                                    <li> {{-- <span class="ti-calendar"></span> --}} 
+                                        @date($blog->tanggal) 
+                                    </li>
+                                    <br>
+                                    <li> 
+                                        <span><a href="{{ url('/detail_blog/'.$blog->slug)}}" style="color : blue">
+                                            Selengkapnya...
+                                        </a></span>
+                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -116,56 +122,30 @@
     
     <!--::regervation_part end::-->
 
-    <!-- footer part start-->
     <footer class="footer-area">
         <div class="footer section_padding">
             <div class="container">
                 <div class="row justify-content-between">
-                    <div class="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
-                    <a href="{{ url('/') }}" class="footer_logo"> <img src="{{ url('assets/z/img/logopus.png') }}" alt="#"> </a>
+                    <div class="col-xl-2 col-md-6 col-sm-6 single-footer-widget">
+                    <a href="{{ url('/') }}" class="footer_logo"> <img src="{{ url('assets/z/img/logopus2.png') }}" alt="#"> </a>
                         <p>Puskesmas Plumbon Indramayu</p>
-                        <div class="social_logo">
+                        {{-- <div class="social_logo">
                             <a href="#"><i class="ti-facebook"></i></a>
                             <a href="#"> <i class="ti-twitter"></i> </a>
                             <a href="#"><i class="ti-instagram"></i></a>
                             <a href="#"><i class="ti-skype"></i></a>
-                        </div>
+                        </div> --}}
                     </div>
-                    <div class="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
+                    <div class="col-xl-8 col-sm-6 col-md-6 single-footer-widget">
                         <h4>Alamat</h4>
                         <ul>
-                            <li align="left">Jl. Raya Jatibarang-Indramayu No.Km6, Plumbon, Kec. Indramayu, Kabupaten Indramayu, 
-                                Jawa Barat 45216</li>
+                            <li class="justify-items-center">
+                                Jl. Raya Jatibarang-Indramayu No.Km6, 
+                                Plumbon, Kecamatan Indramayu, Kabupaten Indramayu, 
+                                Provinsi Jawa Barat 45216
+                            </li>
                         </ul>
                     </div>
-                    <div class="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
-                        <h4>Social Media</h4>
-                        <ul>
-                            <li><a href="#"><i class="ti-facebook"></i> Facebook</a></li>
-                            <li><a href="#"><i class="ti-instagram"></i> Instagram</a></li>
-                            <li><a href="#"><i class="ti-twitter"></i> Twitter </a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-md-6 single-footer-widget">
-                        <h4>Puskesmas</h4>
-                        <p>Puskesmas Plumbon Indramayu</p>
-                        <div class="form-wrap" id="mc_embed_signup">
-                            <form target="_blank"
-                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="form-inline">
-                                <input class="form-control" name="EMAIL" placeholder="Your Email Address"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
-                                    required="" type="email">
-                                <button class="click-btn btn btn-default text-uppercase"> <i class="ti-angle-right"></i>
-                                </button>
-                                <div style="position: absolute; left: -5000px;">
-                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
-                                        type="text">
-                                </div>
-
-                                <div class="info"></div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -175,14 +155,17 @@
             <div class="container">
                 <div class="row align-items-center">
                     <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> 
+                        All rights reserved | This template is made by 
+                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                     <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
-                        <a href="#"><i class="ti-facebook"></i></a>
+                        {{-- <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"> <i class="ti-twitter"></i> </a>
                         <a href="#"><i class="ti-instagram"></i></a>
-                        <a href="#"><i class="ti-skype"></i></a>
+                        <a href="#"><i class="ti-skype"></i></a> --}}
                     </div>
                 </div>
             </div>

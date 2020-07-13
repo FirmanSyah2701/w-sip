@@ -40,7 +40,9 @@
       <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                    data-target="#main-menu" aria-controls="main-menu" 
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="{{route('profilePasien')}}">Pasien</a>
@@ -50,33 +52,52 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{{route('profilePasien')}}"> <i class="menu-icon fa fa-dashboard"></i>Profile </a>
+                        <a href="{{route('profilePasien')}}"> 
+                            <i class="menu-icon fa fa-dashboard"></i>Profile
+                        </a>
                     </li>
                     
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false"> 
                             <i class="menu-icon fa fa-laptop"></i> 
                             Daftar Berobat
                         </a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="{{route('ambilAntrian')}}">Ambil antrian</a></li>
+                            <li>
+                                <i class="fa fa-id-badge"></i>
+                                <a href="{{route('ambilAntrian')}}">Pesan Antrian</a>
+                            </li>
                             
-                            <li><i class="fa fa-id-card-o"></i><a href="{{url('/pasien/lihat_no_antri', session('nama_pasien') )}}">
-                                Lihat no antrian</a>
+                            <li>
+                                <i class="fa fa-id-card-o"></i>
+                                <a href="{{url('/pasien/lihat_no_antri', session('nama_pasien') )}}">
+                                    Lihat no antrian
+                                </a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Konsultasi</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false"> 
+                            <i class="menu-icon fa fa-laptop"></i>Konsultasi
+                        </a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="{{route('patientConsult')}}">Konsultasi</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="{{url('pasien/jawaban_konsultasi')}}">Jawaban Konsultasi</a></li>
+                            <li><i class="fa fa-id-badge"></i>
+                                <a href="{{route('patientConsult')}}">Konsultasi</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-id-card-o"></i>
+                                <a href="{{url('pasien/jawaban_konsultasi')}}">Jawaban Konsultasi</a>
+                            </li>
                         </ul>
                     </li>         
                     
                     <li>
-                        <a href="{{route('showRekamMedisById')}}"> <i class="menu-icon fa fa-dashboard"></i>Rekam Medis </a>
+                        <a href="{{route('showRekamMedisById')}}"> 
+                            <i class="menu-icon fa fa-dashboard"></i>Rekam Medis 
+                        </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -88,7 +109,8 @@
             <header id="header" class="header">
                 <div class="header-menu">
                     <div class="col-sm-7">
-                        <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                        <a id="menuToggle" class="menutoggle pull-left">
+                            <i class="fa fa fa-tasks"></i></a>
                         <div class="header-left"></div>
                     </div>
 
@@ -105,9 +127,7 @@
             @show    
             @yield('content')          
         </div>
-    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
     <script src="{{asset('js/app.js')}}"></script>
-    {{-- <script src="{{url('assets/js/jquery/jquery.min.js')}}"></script> --}}
     <script src="{{url('assets/sufee/js/popper.min.js')}}"></script>
     <script src="{{url('assets/sufee/js/plugins.js')}}"></script>
     <script src="{{url('assets/sufee/js/main.js')}}"></script>
@@ -157,7 +177,7 @@
                         }else{
                             swal(
                                 'Fail',
-                                '' + response.message,
+                                '' + response.message1 + '<br>' + response.message2,
                                 'error'
                             ).then(OK => {
                                 if(OK){
@@ -168,11 +188,7 @@
                     }   
                 });
             });
-        });
-    </script>
 
-    <script>
-        $(document).ready(function () {
             var frmConsult = $('#frmConsult');
             frmConsult.submit(function (event) {
                 event.preventDefault();
@@ -196,7 +212,7 @@
                         }else{
                             swal(
                                 'Fail',
-                                '' + response.message,
+                                '' + response.message1 + '<br>' + response.message2,
                                 'error'
                             ).then(OK => {
                                 if(OK){

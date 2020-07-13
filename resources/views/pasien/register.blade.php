@@ -32,7 +32,8 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="{{route('registerPasienPost')}}" method="POST">
+				<form class="login100-form validate-form" action="{{route('registerPasienPost')}}" 
+					method="POST">
 					@csrf
 					<span class="login100-form-title p-b-26">
 						Sign Up
@@ -116,6 +117,5 @@
 	<script src="{{url('assets/login/vendor/daterangepicker/daterangepicker.js')}}"></script>
 	<script src="{{url('assets/login/vendor/countdowntime/countdowntime.js')}}"></script>
 	<script src="{{url('assets/login/js/main.js')}}"></script>
-  <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

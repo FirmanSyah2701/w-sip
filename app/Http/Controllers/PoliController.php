@@ -7,17 +7,9 @@ use Illuminate\Http\Request;
 
 class PoliController extends Controller
 {
-    public function index(Request $request){
-        if(!$request->session()->exists('admin')){
-            alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
-            return redirect('/admin/loginAdmin');
-        } else {
-            return view('admin.poli');
-        }
-    }
 
-    public function tambah(Request $request) {
-        if(!$request->session()->exists('admin')){
+    public function tambah() {
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
@@ -27,10 +19,12 @@ class PoliController extends Controller
 
     public function store(Request $request) {
         $request->validate([
-            'nama_poli' => 'required', 
+            'nama_poli' => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/', 
         ],
         [
-            'nama_poli.required' => 'Nama Poli Belum Diisi', 
+            'nama_poli.required'    => 'Nama poli harus diisi', 
+            'nama_poli.max'         => 'Nama poli panjang karakter maksima 100',
+            'nama_poli.regex'       => 'Nama poli harus diisi dengan huruf'
         ]);
 
         $data = new Poli();
@@ -39,19 +33,19 @@ class PoliController extends Controller
         alert()->success('Data Poli Berhasil Ditambah', 'Berhasil!');
         return redirect('admin/poli');
     }
-    public  function tampil_data(Request $request){
-        if(!$request->session()->exists('admin')){
+    
+    public function dataPoli(){
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
             $datas = Poli::all();         
             return view('admin.poli',compact('datas'));   
         }  
-
     }
 
-    public function ubah(Request $request, $id_poli) {
-        if(!$request->session()->exists('admin')){
+    public function ubah($id_poli) {
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
@@ -62,7 +56,12 @@ class PoliController extends Controller
 
     public function update($id_poli, Request $request) {
         $request->validate([
-            'nama_poli' => 'required'
+            'nama_poli' => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/', 
+        ],
+        [
+            'nama_poli.required'    => 'Nama poli harus diisi', 
+            'nama_poli.max'         => 'Nama poli panjang karakter maksima 100',
+            'nama_poli.regex'       => 'Nama poli harus diisi dengan huruf'
         ]);
 
         $data = Poli::find($id_poli);

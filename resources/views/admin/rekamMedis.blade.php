@@ -192,7 +192,7 @@
                                             <tr>
                                                 <td>{{$no++}}</td>
                                                 <td>{{$medis->poli->nama_poli}}</td>
-                                                <td>{{$medis->tanggal_berobat}}</td>
+                                                <td>@date($medis->tanggal_berobat)</td>
                                                 <td>{{$medis->pasien->nama_pasien}}</td>
                                                 <td>{{$medis->keterangan}}</td>
                                                 <td>

@@ -177,6 +177,7 @@
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <input type="file" id="foto" name="foto" class="form-control-file">
+                                        <small class="form-text text-muted">JPG|JPEG|PNG Max 2MB</small>
                                     </div>
                                 </div>
 
@@ -192,7 +193,7 @@
 
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="select" class=" form-control-label">Poli</label>
+                                        <label for="select" class="form-control-label">Poli</label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <select name="id_poli" id="select" class="form-control">
@@ -213,14 +214,11 @@
                                     <div class="col col-md-9">
                                         <div class="form-check-inline form-check">
                                             <label for="inline-radio1" class="form-check-label">
-                                                <input type="radio" id="jenis_kelamin" 
-                                                    name="jk" value="perempuan" class="form-check-input">Perempuan
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label for="inline-radio2" class="form-check-label ">
                                                 <input type="radio" id="jenis_kelamin" name="jk" 
-                                                    value="laki-laki" class="form-check-input">Laki-Laki
+                                                    value="laki-laki" class="form-check-input">Laki-laki
+                                                &nbsp;
+                                                <input type="radio" id="jenis_kelamin" name="jk" 
+                                                    value="perempuan" class="form-check-input">Perempuan
                                             </label>
                                         </div>
                                     </div>
@@ -251,7 +249,7 @@
                                         <label for="text-input" class=" form-control-label">Username</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="email" name="username" 
+                                        <input type="text" id="username" name="username" 
                                             placeholder="Masukan Username" class="form-control">
                                     </div>
                                 </div>

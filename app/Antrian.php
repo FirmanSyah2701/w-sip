@@ -28,6 +28,6 @@ class Antrian extends Model
     }
 
     public function dokter(){
-        return $this->hasOne('App\Dokter', 'id_dokter');
+        return $this->belongsTo('App\Dokter', 'id_dokter');
     }
 }

@@ -35,11 +35,11 @@ class Dokter extends Authenticatable
     }
 
     public function poli(){
-        return $this->hasOne('App\Poli', 'id_poli');
+        return $this->belongsTo('App\Poli', 'id_poli');
     }
 
     public function antrian(){
-        return $this->belongsTo('App\Antrian', 'id_dokter');
+        return $this->hasOne('App\Antrian', 'id_dokter');
     }
 
     public function konsul(){

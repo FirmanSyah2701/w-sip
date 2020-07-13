@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="{{ url('assets/z/admin/css/cs-skin-elastic.css') }}">
     <link rel="stylesheet" href="{{ url('assets/z/admin/css/style.css') }}">
-
+    <link rel="stylesheet" href="{{ url('lib/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -29,7 +30,6 @@
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
-
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
@@ -140,8 +140,17 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li class="active">Data Antrian</li>
+                                    <li>
+                                        <a href="{{ url('admin/DashboardAdmin') }}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('admin/dataAntrian') }}">
+                                            Data Antrian
+                                        </a>
+                                    </li>
+                                    <li class="active">Tambah Data Antrian</li>
                                 </ol>
                             </div>
                         </div>
@@ -155,7 +164,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Tambah</strong> Data Antrian
+                            <strong>Tambah Data Antrian </strong> 
                         </div>
                         <div class="card-body card-block">
                             @if($errors->any())
@@ -172,15 +181,17 @@
                             @endif
 
                             <form action="{{ route('antrianPost') }}" method="post" class="form-horizontal">
-                            {{csrf_field()}}
+                                {{csrf_field()}}
                                 <div class="row form-group">
-                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Poli</label></div>
+                                    <div class="col col-md-3">
+                                        <label for="select" class="form-control-label">Poli dan Dokter</label>
+                                    </div>
                                     <div class="col-12 col-md-9">
                                         <select name="id_dokter" id="select" class="form-control">
-                                            <option value="0">Pilih Dokter dan Poli</option>
+                                            <option value="">Pilih Poli dan Dokter</option>
                                             @foreach($dokter as $data)
-                                                <option value="{{ $dokter->id_dokter }}">
-                                                    {{ $dokter->poli->nama_poli }} - {{ $dokter->nama_dokter }}
+                                                <option value="{{ $data->id_dokter }}">
+                                                    {{ $data->poli->nama_poli }} - {{ $data->nama_dokter }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -197,10 +208,11 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="text-input" class="form-control-label">jk</label>
+                                        <label for="text-input" class="form-control-label">Jenis Kelamin</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="radio" name="jk" value="laki-laki"> Laki-laki
+                                        <input type="radio" name="jk" value="laki-laki"> Laki-laki 
+                                        &nbsp;
                                         <input type="radio" name="jk" value="perempuan"> Perempuan
                                     </div>
                                 </div>
@@ -209,8 +221,8 @@
                                         <label for="text-input" class="form-control-label">Usia</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="nama_pasien" name="umur" 
-                                            placeholder="Masukan Nama Pasien" class="form-control">
+                                        <input type="number" min="1" max="100" class="form-control" 
+                                            id="nama_pasien" name="umur" placeholder="Masukan Usia">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -219,7 +231,7 @@
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <input type="text" id="nama_pasien" name="no_telp" 
-                                            placeholder="Masukan Nama Pasien" class="form-control">
+                                            placeholder="Masukan No HP" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -227,7 +239,8 @@
                                         <label for="email-input" class="form-control-label">Tanggal</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="date" id="tanggal_antrian" name="tanggal" class="form-control">
+                                        <input type="date" id="tanggal" name="tanggal" 
+                                            class="form-control" min="{{ $now }}">
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -239,7 +252,6 @@
                                             placeholder="Masukan No antrian" class="form-control">
                                     </div>
                                 </div>
-
                                 <div class="card-body">
                                     <button type="submit" class="btn btn-primary btn-sm" name="admin">
                                         <i class="fa fa-dot-circle-o"></i> Submit
@@ -279,6 +291,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="{{ url('assets/z/admin/js/main.js') }}"></script>
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ url('lib/js/bootstrap-datetimepicker.js') }}"></script>
 </body>
 </html>

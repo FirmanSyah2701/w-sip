@@ -66,7 +66,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ ('dokter/DashboardDokter') }}">
+                    <a class="navbar-brand" href="{{ url('dokter/DashboardDokter') }}">
                         <img src="{{ url('assets/z/img/logopus4.png') }}" alt="Logo">
                     </a>
                     <a class="navbar-brand hidden" href="./">
@@ -118,7 +118,9 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
+                                    <li>
+                                        <a href="{{ url('dokter/DashboardDokter') }}">Dashboard</a>
+                                    </li>
                                     <li class="active">Data Konsultasi</li>
                                 </ol>
                             </div>
@@ -156,20 +158,15 @@
                                         @foreach($konsultasi as $konsul)
                                             <tr>
                                                 <td>{{$no++}}</td>
-                                                <td>{{$data->pasien->nama_pasien}}</td>
-                                                <td>{{$data->poli->nama_poli}}</td>
-                                                <td>{{$data->konsul_pasien}}</td>
-                                                <td>{{$data->jawaban_dokter}}</td>
+                                                <td>{{$konsul->pasien->nama_pasien}}</td>
+                                                <td>{{$konsul->poli->nama_poli}}</td>
+                                                <td>{{$konsul->konsul_pasien}}</td>
+                                                <td>{{$konsul->jawaban_dokter}}</td>
                                                 <td>
                                                     <div>    
-                                                        <a href="{{ url('dokter/BalasDokter'.$data->id_konsultasi) }}" 
+                                                        <a href="{{ url('dokter/BalasDokter'.$konsul->id_konsultasi) }}" 
                                                             class="btn btn-warning btn-sm"  title="Edit">
                                                             <i class="fas fa-pencil-alt"></i> Balas
-                                                        </a>
-                                                        <p>
-                                                        <a href="{{ url('dokter/detailDataDiriPasien'.$data->id_antrian) }}" 
-                                                            class="btn btn-info btn-sm"  title="Lihat">
-                                                            <i class="fas fa-eye"></i> Lihat
                                                         </a>
                                                     </div>
                                                 </td>

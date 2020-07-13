@@ -116,8 +116,15 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li class="active">Lihat Rekam Medis</li>
+                                    <li>
+                                        <a href="{{ url('dokter/DashboardDokter') }}">Dashboard</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="{{ url('dokter/dataMedisPasien') }}">Data Medis Pasien</a>
+                                    </li>
+                                    <li>
+                                        Lihat Rekam Medis
+                                    </li>
                                 </ol>
                             </div>
                         </div>

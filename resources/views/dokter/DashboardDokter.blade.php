@@ -80,8 +80,7 @@
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" 
                             aria-haspopup="true" aria-expanded="false">
                             {{ session('nama_dokter') }} &nbsp;
-                            <img class="user-avatar rounded-circle" 
-                                src="{{ url('assets/z/img/pp.png') }}" alt="User Avatar">
+                            <i class="user-avatar fa-fa-male rounded-circle">
                         </a>
 
                         <div class="user-menu dropdown-menu">
