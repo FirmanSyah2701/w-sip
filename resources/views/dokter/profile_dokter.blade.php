@@ -86,7 +86,6 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a href="{{ url('dokter/edit') }}">Profile</a>
                             <a class="nav-link" href="/logoutDokter"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
                     </div>
@@ -101,49 +100,32 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
-                    <div class="col-sm-6 col-lg-3">
-                    <a href="{{url ('dokter/dataKonsultasi')}}">
-                        <div class="card text-white bg-flat-color-1">
-                            <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
-                                        <span class="currency float-left mr-1"></span>
-                                        <span class="count">{{ $konsul }}</span>
-                                    </h3>
-                                    <p class="text-light mt-1 m-0">Data Konsultasi</p>
-                                </div><!-- /.card-left -->
-
-                                <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-browser"></i>
-                                </div><!-- /.card-right -->
-
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Profile</strong>
+                                <button type="button" class="btn btn-primary pull-right btn-sm" 
+                                data-toggle="modal" data-target="#edit-data{{ $datas->id_dokter }}" 
+                                title="Edit Profile">
+                                Ubah Akun
+                            </button>
                             </div>
-
+                            <div class="card-body">
+                                @if($datas->foto != '')
+                                    <img class="mx-auto d-block rounded-circle img-responsive" 
+                                        width="260px" height="200px" 
+                                        src="{{URL::to('/')}}/assets/img/product/{{ $datas->foto }}">
+                                @endif
+                                <div style="margin-top: 40px;"></div>
+                                <div class="text-center"> Username: {{ $datas->username }} </div>
+                                <div class="text-center"> Nama Lengkap: {{ $datas->nama_dokter }} </div>
+                                <div class="text-center"> Poli: {{ $datas->poli->nama_poli }} </div>
+                                <div class="text-center"> Jenis Kelamin: {{ $datas->jk }} </div>
+                                <div class="text-center"> Nomer HP: {{ $datas->no_telp }} </div>
+                                <div class="text-center"> Alamat: {{ $datas->alamat }} </div>
+                            </div>
                         </div>
                     </div>
-                    <!--/.col-->
-
-                    <div class="col-sm-6 col-lg-3">
-                    <a href="{{url ('dokter/dataMedisPasien')}}">
-                        <div class="card text-white bg-flat-color-3">
-                            <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                    <h3 class="mb-0 fw-r">
-                                        <span class="count">{{ $medis }}</span>
-                                    </h3>
-                                    <p class="text-light mt-1 m-0">Data Medis Pasien</p>
-                                </div><!-- /.card-left -->
-
-                                <div class="card-right float-right text-right">
-                                    <i class="icon fade-5 icon-lg pe-7s-users"></i>
-                                </div><!-- /.card-right -->
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <!--/.col-->
-
                 <!--kk-->
                 
                 <!-- /Widgets -->
@@ -188,6 +170,105 @@
     </div>
     <!-- /#right-panel -->
 
+    <!-- Modal Ubah Data  -->
+    <div id="edit-data{{$datas->id_dokter}}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- konten modal-->
+            <div class="modal-content">
+                <!-- heading modal -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediumModalLabel">Ubah Akun</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- body modal -->
+                <div class="modal-body">
+                    <form action="{{route('editProfile', $datas->id_dokter)}}" method="POST"
+                        enctype="multipart/form-data" class="form-horizontal tasi-form">
+
+                        @csrf
+                        @method('PUT')
+                        
+                        @if($datas->foto != '')
+                            <img class="mx-auto d-block img-responsive rounded-circle" 
+                                width="260px" height="200px" 
+                                src="{{URL::to('/')}}/assets/img/product/{{ $datas->foto }}">
+                        @endif
+
+                        <div style="margin-top: 40px;"></div>
+                        <div class="row form-group">
+                            <label class="col-sm-4 control-label">Username</label>
+                            <div class="col-sm-8">                    
+                                <input type="text" class="form-control" 
+                                    name="username" value="{{ $datas->username }}">
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <label class="col-sm-4 control-label">Nama lengkap</label>
+                            <div class="col-sm-8">                    
+                                <input type="text" class="form-control" 
+                                    name="nama_datas" value="{{ $datas->nama_dokter }}">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-sm-4 control-label">Poli</label>
+                            <div class="col-sm-8">                    
+                                <select name="poli" class="form-control">
+                                    <option value="{{ $datas->id_poli }}">
+                                        {{ $datas->poli->nama_poli }}
+                                    </option>
+                                    @foreach($poli as $data)
+                                        @if($datas->id_poli != $data->id_poli)
+                                            <option value="{{ $data->id_poli }}">
+                                                {{ $data->nama_poli }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-sm-4 control-label">Nomer Telpon</label>
+                            <div class="col-sm-8">                    
+                                <input type="text" class="form-control" 
+                                    name="no_telp" value="{{ $datas->no_telp }}">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-sm-4 control-label">Alamat</label>
+                            <div class="col-sm-8">                    
+                                <textarea class="form-control" name="alamat">{{ $datas->alamat }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-sm-4 control-label">Foto</label>
+                            <div class="col-sm-8">                    
+                                <input type="file" class="form-control" name="foto">
+                                <small class="form-text text-muted">JPG|JPEG|PNG Max 2MB</small>
+                                <input type="hidden" name="hidden_foto" value="{{ $datas->photo }}">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                Batal
+                            </button>
+                        </div>             
+                    </form>
+                </div>        
+            </div>
+        </div>
+    </div>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>

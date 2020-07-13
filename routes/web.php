@@ -53,10 +53,9 @@ Route::get('/registerDokter', 'DokterController@registerDokter');
 Route::post('/registerDokterPost', 'DokterController@registerDokterPost');
 Route::get('/logoutDokter', 'DokterController@logoutDokter');
 Route::get('dokter/tambah', 'DokterController@create');
-Route::get('dokter/edit/{id}', 'DokterController@edit');
+Route::get('dokter/edit', 'DokterController@ubah');
 Route::post('dokter/tambah/proses', 'DokterController@store');
 Route::put('dokter/edit/proses/{id}', 'DokterController@update');
-Route::delete('dokter/hapus/{id}', 'DokterController@destroy');
 
 //--------------CRUD Antrian---------------------------------------------------------
 Route::get('admin/dataAntrian','AntrianController@index');
@@ -85,7 +84,7 @@ Route::post('AksiTambahRekamMedis','RekamMedisController@store');
 Route::get('admin/UbahRekamMedis{id_rekam_medis}','RekamMedisController@ubah');
 Route::put('AksiUbahRekamMedis{id_rekam_medis}','RekamMedisController@update');
 Route::get('HapusRekamMedis{id_rekam_medis}','RekamMedisController@delete');
-Route::get('dokter/dataMedisPasien','RekamMedisController@dataMedisbyDokter');
+Route::get('dokter/dataMedisPasien','RekamMedisController@dataMedisByDokter');
 Route::get('dokter/LihatRekamMedis{id_rekam_medis}','RekamMedisController@lihatRekamMedis');
 Route::get('/pasien/rekam_medis', 'RekamMedisController@showMedisByPatient')->name('showRekamMedisById');
 

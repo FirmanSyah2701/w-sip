@@ -116,7 +116,7 @@ class RekamMedisController extends Controller
         return redirect('admin/rekamMedis');
     }
 
-    public function dataMedisbyDokter(){
+    public function dataMedisByDokter(){
         if(!session()->exists('dokter')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/dokter/loginDokter');

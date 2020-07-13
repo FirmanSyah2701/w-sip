@@ -89,14 +89,14 @@ class DokterController extends Controller
         }
     }
 
-    public function ubah($id) {
+    public function ubah() {
         if(!session()->exists('dokter')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('dokter/loginDokter');
         }else{
-            $datas = Dokter::find($id);
+            $datas = Dokter::find(session('dokter'));
             $poli  = Poli::all();    
-            return view('admin/UbahDataDokter',compact('datas','poli'));
+            return view('dokter.profile_dokter', compact('datas','poli'));
         }
     }
 
