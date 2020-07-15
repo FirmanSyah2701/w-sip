@@ -19,7 +19,6 @@ class AntrianController extends Controller
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
-            Antrian::whereRaw('tanggal < now() - interval 1 DAY')->delete();
             $antrian  = Antrian::all()->sortBy('no_antrian');   
             $poli     = Poli::all();
     	    return view('admin/dataAntrian',compact('antrian', 'poli'));     

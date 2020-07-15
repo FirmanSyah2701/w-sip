@@ -165,7 +165,7 @@ class PasienController extends Controller
             'alamat'        => $request->alamat,
             'foto'          => $foto_name
         ];
-        Pasien::whereId_pasien($id)->update($data);
+        Pasien::where('id_pasien',$id)->update($data);
         return redirect()->route('profilePasien')->with('success', 'Data Berhasil Diubah');
     }
 
