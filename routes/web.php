@@ -110,7 +110,7 @@ Route::get('/logoutAdmin', 'AdminController@logoutAdmin');
 //----------------------Konsultasi ---------------
 Route::get('dokter/dataKonsultasi','KonsulController@dataKonsul');
 Route::get('dokter/TambahDataKonsultasi','KonsulController@tambah');
-Route::post('AksiTambahDataKonsultasi','KonsulController@store');
+Route::post('AksiTambahDataKonsultasi','KonsulController@store')->name('postConsult');
 Route::get('dokter/BalasDokter{id_Konsultasi}','KonsulController@ubah');
 Route::put('AksiBalasJawaban{id_Konsultasi}','KonsulController@update');
 Route::get('HapusDataKonsultasi{id_Konsultasi}','KonsulController@delete');

@@ -40,6 +40,6 @@ class Pasien extends Authenticatable
     }
 
     public function konsul(){
-        return $this->belongsTo('App\Konsul', 'id_pasien');
+        return $this->hasMany('App\Konsul', 'id_konsultasi');
     }
 }

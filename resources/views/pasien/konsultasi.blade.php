@@ -20,9 +20,9 @@
                         <form id="frmConsult" action="{{route('addKonsultasi')}}" method="POST">
                             @csrf
                             <div class="col-md-12">
-                                <label for="">Poli</label>
+                                <label for="">Dokter dan Poli</label>
                                 <select name="id_dokter" class="form-control">
-                                    <option value="" selected disabled>Pilih Poli dan Dokter</option>
+                                    <option value="" selected disabled>Pilih Dokter dan Poli</option>
                                     @foreach ($dokter as $data)
                                         <option value="{{ $data->id_dokter }}">
                                             {{ $data->nama_dokter }} - {{ $data->poli->nama_poli }}

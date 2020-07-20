@@ -41,7 +41,7 @@ class PasienController extends Controller
             if($auth->attempt($credentials)){
                 $id_pasien  = Pasien::whereUsername($request->username)->value('id_pasien');
                 $pasien     = Pasien::whereIdPasien($id_pasien)->first();
-                Session::put('pasien', $id_pasien);
+                session()->put('pasien', $id_pasien);
                 return view('pasien.profile', compact('id_pasien', 'pasien'));
             }else{
                 return redirect()
@@ -66,7 +66,7 @@ class PasienController extends Controller
     public function registerPasien(Request $request){
         $request->validate([
             'username'          => 'required|unique:pasien|alpha_num|max:50',
-            'nama_pasien'       => 'required|max:100|string|regex:/^[a-zA-Z\s]*$/',
+            'nama_pasien'       => 'required|max:100|string|regex:/^[a-zA-Z\s\']*$/',
             'jk'                => 'required|in:laki-laki,perempuan',
             'umur'              => 'required|min:1|max:100|numeric|regex:/^[0-9]*$/',
             'no_telp'           => 'required|string|min:10|max:15|regex:/^[0-9]*$/',
@@ -75,7 +75,7 @@ class PasienController extends Controller
         ],
         [
             'nama_pasien.required'  => 'Nama pasien Belum Diisi',
-            'nama_pasien.regex'     => 'Format nama pasien menggunakan huruf dan spasi',
+            'nama_pasien.regex'     => 'Format nama pasien hanya boleh huruf, spasi dan tanda petik satu',
             'nama_pasien.max'       => 'Nama pasien maksimal 100 karakter',
             'username.required'     => 'username belum diisi',
             'username.unique'       => 'Akun sudah terdaftar',
@@ -120,7 +120,7 @@ class PasienController extends Controller
         if(!session()->exists('pasien')){
             return redirect()->route('loginPasien');
         }else{
-            $pasien = Pasien::whereIdPasien(session('pasien'))->first();
+            $pasien = Pasien::where('id_pasien',session('pasien'))->first();
             return view('pasien.profile', compact('pasien'));
         }
     }

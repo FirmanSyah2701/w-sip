@@ -43,7 +43,7 @@ class Dokter extends Authenticatable
     }
 
     public function konsul(){
-        return $this->belongsTo('App\Konsul', 'id_dokter');
+        return $this->hasMany('App\Konsul', 'id_konsultasi');
     }
 
     public function rekamMedis(){

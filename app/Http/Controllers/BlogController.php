@@ -36,7 +36,7 @@ class BlogController extends Controller
 
         $file           = $request->file('foto');
         $nama_file      = time()."_".$file->getClientOriginalName();
-        $tujuan_upload  = '/assets/img/uploads/';
+        $tujuan_upload  = public_path('/assets/img/uploads');
         $file->move($tujuan_upload,$nama_file);
 
         $data = new Blog();
@@ -95,11 +95,12 @@ class BlogController extends Controller
         }
         else{
             unlink('/assets/img/uploads/'.$data->foto); //menghapus file lama
-            $file       = $request->file('gambar'); // menyimpan data gambar yang diupload ke variabel $file
+            $file       = $request->file('foto'); // menyimpan data gambar yang diupload ke variabel $file
             $nama_file  = time()."_".$file->getClientOriginalName();
             $file->move('uploads',$nama_file); // isi dengan nama folder tempat kemana file diupload
-            $data->gambar = $nama_file;
+            $data->foto = $nama_file;
         }
+        
         $data->save();
         alert()->success('Data Blog Berhasil Diubah', 'Berhasil!');
         return redirect('admin/blog_admin');

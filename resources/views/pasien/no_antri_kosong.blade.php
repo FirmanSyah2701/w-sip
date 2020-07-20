@@ -16,13 +16,7 @@
                         <strong class="card-title">Lihat No Urut Antrian</strong>
                     </div>
                     <div class="card-body">
-                        <p style="font-weight:bold">Nama: {{ $antrian->nama_pasien }}</p>    
-                        <p style="font-weight:bold">Nomer Urut Antrian: 
-                            {{ $antrian->no_antrian ? $antrian->no_antrian : "Tunggu konfirmasi"  }} 
-                        </p>
-                        <p style="font-weight:bold">Poli: {{ $antrian->poli->nama_poli }}</p>
-                        <p style="font-weight:bold">Dokter: {{ $antrian->dokter->nama_dokter }}</p>
-                        <p style="font-weight:bold">Tanggal: @date($antrian->tanggal)</p>       
+                        Anda Belum Memesan Antrian
                     </div>
                 </div>
             </div>

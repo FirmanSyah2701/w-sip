@@ -23,7 +23,7 @@ class Poli extends Model
     }
 
     public function konsul(){
-        return $this->belongsTo('App\Konsul', 'id_poli');
+        return $this->hasMany('App\Konsul', 'id_konsultasi');
     }
 
     public function rekam_medis(){

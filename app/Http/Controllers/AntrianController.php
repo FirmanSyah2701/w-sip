@@ -21,7 +21,7 @@ class AntrianController extends Controller
         }else{
             $antrian  = Antrian::all()->sortBy('no_antrian');   
             $poli     = Poli::all();
-    	    return view('admin/dataAntrian',compact('antrian', 'poli'));     
+    	    return view('admin.dataAntrian',compact('antrian', 'poli'));     
         }
     }
 
@@ -32,7 +32,7 @@ class AntrianController extends Controller
         }else{
             $dokter = Dokter::all();
             $now    = Carbon::today()->toDateString();
-            return view('admin/TambahDataAntrian', compact('dokter', 'now'));
+            return view('admin.TambahDataAntrian', compact('dokter', 'now'));
         }
     }
 
@@ -68,7 +68,9 @@ class AntrianController extends Controller
             $poli           = Dokter::where('id_dokter', $request->id_dokter)
                                 ->value('id_poli');
             $checkAntrian   = Antrian::where('no_antrian', $request->no_antrian)
-                                ->where('id_dokter')->count(); 
+                                ->where('id_dokter', $request->id_dokter)
+                                ->where('id_poli', $request->id_poli)
+                                ->count(); 
             $tanggal        = date('l', strtotime($request->tanggal));
 
             if($tanggal != 'Saturday' && $tanggal != 'Sunday'){
@@ -132,8 +134,8 @@ class AntrianController extends Controller
             return redirect()->route('pesanAntrian')->with('success', 'Pesanan Berhasil Disimpan');
         }else{
             $validator = Validator::make($request->all(),[
-                'id_dokter' => 'required',
-                'tanggal'   => 'required|date|before:tomorrow',
+                'id_dokter'     => 'required',
+                'tanggal'       => 'required|date|before:tomorrow'
             ], 
             [
                 'id_dokter.required'   => 'Poli dan Dokter harus dipilih',
@@ -143,7 +145,7 @@ class AntrianController extends Controller
     
             if($validator->fails()) {
                 return response()->json([
-                    'error'      => 1,
+                    'error'      => 2,
                     'message1'   => $validator->errors()->get('id_dokter'),
                     'message2'   => $validator->errors()->get('tanggal')
                 ], 200);
@@ -163,22 +165,22 @@ class AntrianController extends Controller
                 'status'        => 0
             ];
     
-            $exists = Antrian::where('nama_pasien', $pasien)->get();
-    
-            if(count($exists)){
+            $exists = Antrian::where('nama_pasien', $pasien->nama_pasien)
+                        ->where('no_telp', $pasien->no_telp)->count();
+            if($exists > 0){
                 return response()->json([
-                    'error'     => 2,
-                    'message'   => 'Tidak boleh memesan antrian dua kali dalam sehari'
+                    'error'     => 1,
+                    'message'   => 'Tidak boleh memesan lebih dari satu kali dalam sehari'
                 ], 200);
-            }
-    
-            $create = Antrian::create($data);
+            }else{
+                $create = Antrian::create($data);
             
-            if($create){
-                return response()->json([
-                    'error'   => 0,
-                    'message' => 'Data berhasil di tambahkan'
-                ], 200);
+                if($create){
+                    return response()->json([
+                        'error'   => 0,
+                        'message' => 'Data berhasil di tambahkan'
+                    ], 200);
+                }
             }
         }
     }
@@ -195,23 +197,31 @@ class AntrianController extends Controller
 
     public function update($id_antrian, Request $request) {
         $request->validate([
-            'no_antrian' => 'required|numeric|min:1|max:100|unique:antrian,no_antrian'      
+            'no_antrian' => 'required|numeric|min:1|max:100'      
         ],
         [
             'no_antrian.required' => 'Nomer antrian harus diisi',
-            'no_antrian.unique'   => 'Nomer antrian sudah ada',
             'no_antrian.numeric'  => 'Nomer antrian harus diisi dengan angka',
             'no_antrian.max'      => 'Batas nomer antrian maksimal 100',
             'no_antrian.min'      => 'Batas nomer antrian minimal 1'
         ]);
-
-        $data = Antrian::find($id_antrian);
         
-        $data->no_antrian = $request->no_antrian;
-        $data->status     = 1;
-        $data->save();
-        alert()->success('No Antrian Sudah DItambahkan', 'Berhasil');
-        return redirect('admin/dataAntrian');
+        $exists = Antrian::where('no_antrian', $request->no_antrian)
+                    ->where('id_dokter', $request->id_dokter)
+                    ->where('id_poli', $request->id_poli)
+                    ->count();
+        if($exists >= 1){
+            return redirect()
+                ->back()
+                ->withErrors('Pada poli tersebut nomer antrian tidak boleh sama');
+        }else{
+            $data   = Antrian::find($id_antrian);
+            $data->no_antrian = $request->no_antrian;
+            $data->status     = 1;
+            $data->save();
+            alert()->success('No Antrian Sudah DItambahkan', 'Berhasil');
+            return redirect('admin/dataAntrian');
+        }
     }
 
     public function delete($id_antrian) {
@@ -244,8 +254,11 @@ class AntrianController extends Controller
     public function showByPatient()
     {
         $name     = Pasien::where('id_pasien', session('pasien'))->value('nama_pasien');
-        $telp     = Pasien::where('id_pasien', session('pasien'))->value('no_telp');
-        $antrian  = Antrian::where('nama_pasien', $name)->where('no_telp', $telp)->first();
-        return view('pasien.lihat_antri', compact('antrian'));
+        $antrian  = Antrian::where('nama_pasien', $name)->first();
+        if($antrian != null){
+            return view('pasien.lihat_antri', compact('antrian'));
+        }else{
+            return view('pasien.no_antri_kosong');
+        }
     }
 }

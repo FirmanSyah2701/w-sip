@@ -268,7 +268,16 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="{{ url('assets/z/admin/js/main.js') }}"></script>
     <script src="{{ url('assets/tinymce/tinymce.min.js') }}"></script>
-    <script> tinymce.init({ selector:'textarea', height:400 }); </script>
+    <script> 
+        tinymce.init({ 
+            selector:'textarea', 
+            theme:'modern',
+            height:400, 
+            forced_root_block: false,
+            valid_elements:"a[href|target=_blank], strong/b,div[align],br",
+            branding:false
+        });  
+    </script>
 
 </body>
 </html>

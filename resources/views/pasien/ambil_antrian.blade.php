@@ -30,7 +30,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <label style="margin-top: 10px;">Tanggal</label>
                                 <input type="date" name="tanggal" id="tanggal" 
                                     class="form-control" min="{{ $now }}">

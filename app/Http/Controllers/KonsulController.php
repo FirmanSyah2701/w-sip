@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Poli;
 use App\Dokter;
 use App\Konsul;
-use App\Poli;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class KonsulController extends Controller
@@ -25,13 +24,12 @@ class KonsulController extends Controller
         if(!session()->exists('pasien')){
             return redirect()->route('loginPasien');
         }else{
-            $konsul = Konsul::where('id_pasien', session('pasien'))->first();
+            $konsul = Konsul::where('id_pasien', session('pasien'))->get();
             return view('pasien.jawaban_konsul', compact('konsul'))->with('i');
         }
     }
 
     public function store(Request $request){
-
         $validator = Validator::make($request->all(),[
             'id_dokter'       => 'required',
             'konsul_pasien'   => 'required',
@@ -49,22 +47,21 @@ class KonsulController extends Controller
             ], 200);
         }
 
-        $poli = Dokter::whereIdPoli($request->id_dokter)->value('id_poli');
-
-        $data = array(
-            'id_pasien'      => session('pasien'),
-            'id_poli'        => $poli,     
+        $poli = Dokter::where('id_dokter', $request->id_dokter)->value('id_poli');
+        
+        $data = [
+            'id_pasien'      => session('pasien'),     
             'id_dokter'      => $request->id_dokter,
+            'id_poli'        => $poli,
             'konsul_pasien'  => $request->konsul_pasien
-        );
+        ];
 
-        $konsul = Konsul::create($data);
-        if($konsul){
-            return response()->json([
-                'error'   => 0,
-                'message' => 'Data berhasil di tambahkan'
-            ], 200);
-        }
+        Konsul::create($data);
+        
+        return response()->json([
+            'error'   => 0,
+            'message' => 'Data berhasil di tambahkan'
+        ], 200);
     }
 
     public function dataKonsul(){
@@ -73,7 +70,7 @@ class KonsulController extends Controller
             return redirect('/dokter/loginDokter');
         }else{
             $konsultasi  = Konsul::where('id_dokter', session('dokter'))->get();
-    	    return view('dokter/dataKonsultasi',compact('konsultasi'));     
+    	    return view('dokter.dataKonsultasi',compact('konsultasi'));     
         }
     }
 
@@ -83,7 +80,7 @@ class KonsulController extends Controller
             return redirect('/dokter/loginDokter');
         }else{
             $datas = Konsul::find($id_konsultasi);
-            return view('dokter/BalasDokter',compact('datas'));
+            return view('dokter.BalasDokter',compact('datas'));
         }
     }
 

@@ -27,13 +27,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($konsul as $data)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $konsul->poli->nama_poli }}</td>
-                                    <td>{{ $konsul->dokter->nama_dokter }}</td>
-                                    <td>{{ $konsul->konsul_pasien }}</td>
-                                    <td></td>
+                                    <td>{{ $data->poli->nama_poli }}</td>
+                                    <td>{{ $data->dokter->nama_dokter }}</td>
+                                    <td>{{ $data->konsul_pasien }}</td>
+                                    <td>{{ $data->jawaban_dokter }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

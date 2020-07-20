@@ -14,20 +14,20 @@ use Illuminate\Support\Facades\Validator;
 class DokterController extends Controller
 {
     public function tambah() {
-        if(!session()->exists('admin')){
+        /* if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
-        }else{
+        }else{ */
             $poli = Poli::all();
             return view('admin/TambahDataDokter', compact('poli'));
-        }
+        //}
     }
 
     public function store(Request $request) {
         $request->validate([
             'foto'          => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'username'      => 'required|alpha_num|max:50|unique:dokter,username',
-            'nama_dokter'   => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/',
+            'nama_dokter'   => 'required|string|max:100|regex:/^[a-zA-Z\s\']*$/',
             'id_poli'       => 'required',
             'jk'            => 'required|in:laki-laki,perempuan',
             'no_telp'       => 'required|string|min:10|max:15|regex:/^[0-9]*$/', 
@@ -61,7 +61,8 @@ class DokterController extends Controller
 
         $file           = $request->file('foto');
         $nama_file      = time()."_".$file->getClientOriginalName();
-        $tujuan_upload  = 'assets/img/dokter';
+        
+        $tujuan_upload  = public_path('assets/img/dokter');
         $file->move($tujuan_upload,$nama_file);
 
         $data              = new Dokter();
@@ -85,7 +86,7 @@ class DokterController extends Controller
         }else{
             $datas = Dokter::all();     
             $poli  = Poli::all();    
-            return view('admin/dataDokter',compact('datas','poli'));     
+            return view('admin.dataDokter',compact('datas','poli'));     
         }
     }
 
@@ -117,7 +118,7 @@ class DokterController extends Controller
             'username.regex'        => 'Format username berupa huruf atau angka 
                                         dan tidak boleh menggunakan spasi',
             'id_poli.required'      => 'Poli Belum Diisi',
-            'no_telp.required'      => 'Nomor HP Belum Diisi',
+            'no_telp.required'      => 'Nomor HP harus diisi Diisi',
             'no_telp.regex'         => 'Format nomer hp harus berupa bilangan bulat',
             'no_telp.min'           => 'batas nomer telpon minimal 10 digit',
             'no_telp.min'           => 'batas nomer telpon maksimal 15 digit',
@@ -187,10 +188,10 @@ class DokterController extends Controller
         }else{
             if($auth->attempt($credentials)){
                 $dokter  = Dokter::where('username', $request->username)->first();
-                
+            
                 session()->put('dokter', $dokter->id_dokter);
                 session()->put('nama_dokter', $dokter->nama_dokter);
-                session()->put('jk_dokter', $dokter->jk);
+                //session()->put('jk_dokter', $dokter->jk);
                 $konsul  = Konsul::where('id_dokter', $dokter->id_dokter)->count();
                 $medis   = RekamMedis::where('id_dokter', $dokter->id_dokter)->count(); 
                 return view('dokter.DashboardDokter', compact('konsul', 'medis'));

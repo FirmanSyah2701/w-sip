@@ -173,8 +173,10 @@
                                 if(OK){
                                     window.location.href = "{{ route('liatAntrian') }}";
                                 }
-                            }); 
-                        }else{
+                            });
+                        } 
+
+                        if(response.error == 2){
                             swal(
                                 'Fail',
                                 '' + response.message1 + '<br>' + response.message2,
@@ -185,10 +187,25 @@
                                 }
                             });
                         }
+
+                        if(response.error == 1){
+                            swal(
+                                'Fail',
+                                '' + response.message,
+                                'error'
+                            ).then(OK => {
+                                if(OK){
+                                    window.location.href = "{{ route('ambilAntrian') }}";
+                                }
+                            });    
+                        }
                     }   
                 });
             });
-
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
             var frmConsult = $('#frmConsult');
             frmConsult.submit(function (event) {
                 event.preventDefault();

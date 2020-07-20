@@ -19,10 +19,11 @@ class PoliController extends Controller
 
     public function store(Request $request) {
         $request->validate([
-            'nama_poli' => 'required|string|max:100|regex:/^[a-zA-Z\s]*$/', 
+            'nama_poli' => 'required|unique:poli|string|max:100|regex:/^[a-zA-Z\s]*$/', 
         ],
         [
-            'nama_poli.required'    => 'Nama poli harus diisi', 
+            'nama_poli.required'    => 'Nama poli harus diisi',
+            'nama_poli.unique'      => 'Nama poli sudah ada', 
             'nama_poli.max'         => 'Nama poli panjang karakter maksima 100',
             'nama_poli.regex'       => 'Nama poli harus diisi dengan huruf'
         ]);
