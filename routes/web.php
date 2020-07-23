@@ -116,4 +116,7 @@ Route::put('AksiBalasJawaban{id_Konsultasi}','KonsulController@update');
 Route::get('HapusDataKonsultasi{id_Konsultasi}','KonsulController@delete');
 Route::get('/pasien/konsultasi', 'KonsulController@index')->name('patientConsult');
 Route::post('/pasien/konsultasiPost', 'KonsulController@store')->name('addKonsultasi');
-Route::get('/pasien/jawaban_konsultasi', 'KonsulController@konsulPasien')->name('patientListConsult');;
+Route::get('/pasien/jawaban_konsultasi', 'KonsulController@konsulPasien')->name('patientListConsult');
+
+Route::get('/api/DataCovidIndonesia', 'CovidController@getApi');
+

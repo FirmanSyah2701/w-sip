@@ -73,9 +73,13 @@ class PoliController extends Controller
     }
 
     public function delete($id_poli) {
-        $datas = Poli::find($id_poli);
-        $datas->delete();
-        alert()->warning('Data Poli Berhasil Dihapus', 'Hapus!');
-        return redirect('admin/poli');
+        try {
+            $datas = Poli::find($id_poli);
+            $datas->delete();
+            alert()->warning('Data Poli Berhasil Dihapus', 'Hapus!');
+            return redirect('admin/poli');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors('Data gagal dihapus');
+        }
     }
 }

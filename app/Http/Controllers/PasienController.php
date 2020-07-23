@@ -39,8 +39,8 @@ class PasienController extends Controller
             return view('pasien.login')->withErrors($validator);
         }else{
             if($auth->attempt($credentials)){
-                $id_pasien  = Pasien::whereUsername($request->username)->value('id_pasien');
-                $pasien     = Pasien::whereIdPasien($id_pasien)->first();
+                $id_pasien  = Pasien::where('username', $request->username)->value('id_pasien');
+                $pasien     = Pasien::where('id_pasien',$id_pasien)->first();
                 session()->put('pasien', $id_pasien);
                 return view('pasien.profile', compact('id_pasien', 'pasien'));
             }else{
@@ -101,17 +101,7 @@ class PasienController extends Controller
             'password.max'          => 'Password maksimal 50 karakter'
         ]);
 
-        $data = [
-            'username'      => $request->username,
-            'nama_pasien'   => $request->nama_pasien,
-            'jk'            => $request->jk,
-            'umur'          => $request->umur,
-            'no_telp'       => $request->no_telp,
-            'alamat'        => $request->alamat,
-            'password'      => $request->password
-        ];
-
-        Pasien::create($data);
+        Pasien::create($request->all());
 
         return redirect()->route('loginPasien')->with('success', 'Daftar akun berhasil');
     }

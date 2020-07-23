@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('data/poli', 'API\PoliApiController@getPoli');
+Route::post('data/poli', 'API\PoliApiController@store');
+Route::put('data/poli/{id}', 'API\PoliApiController@update');
+Route::delete('data/poli/{id}', 'API\PoliApiController@destroy');

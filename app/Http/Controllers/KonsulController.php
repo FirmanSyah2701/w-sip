@@ -56,12 +56,13 @@ class KonsulController extends Controller
             'konsul_pasien'  => $request->konsul_pasien
         ];
 
-        Konsul::create($data);
-        
-        return response()->json([
-            'error'   => 0,
-            'message' => 'Data berhasil di tambahkan'
-        ], 200);
+        $create = Konsul::create($data);
+        if($create){
+            return response()->json([
+                'error'   => 0,
+                'message' => 'Data berhasil di tambahkan'
+            ], 200);
+        }
     }
 
     public function dataKonsul(){
@@ -89,7 +90,7 @@ class KonsulController extends Controller
             'jawaban_dokter' => 'required'
         ],
         [
-            'jawaban_dokter.required' => 'Balas terlebih dahulu'
+            'jawaban_dokter.required' => 'Jawaban tidak boleh kosong'
         ]);
 
         $data = Konsul::find($id_konsultasi);

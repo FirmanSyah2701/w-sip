@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Validator;
 class DokterController extends Controller
 {
     public function tambah() {
-        /* if(!session()->exists('admin')){
+        if(!session()->exists('admin')){
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
-        }else{ */
+        }else{ 
             $poli = Poli::all();
             return view('admin/TambahDataDokter', compact('poli'));
-        //}
+        }
     }
 
     public function store(Request $request) {

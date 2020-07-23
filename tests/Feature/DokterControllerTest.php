@@ -21,40 +21,38 @@ class DokterControllerTest extends TestCase
 
         $data              = new Dokter();
         $data->foto        = $nama_file;
-        $data->username    = "anu123"; 
-        $data->nama_dokter = "sianu";
+        $data->username    = "mjoko123456"; 
+        $data->nama_dokter = "Muhammad Joko";
         $data->id_poli     = 1;
         $data->jk          = "laki-laki";
-        $data->no_telp     = "0897123091";
+        $data->no_telp     = "081201987586";
         $data->alamat      = "indrmayu";
-        $data->password    = "anu123";
-        
+        $data->password    = "mjoko123456";
         $data->save();
         
         //copy file to destination
         $toCopy     = public_path('/assets/img/dokter/'.$nama_file);
         File::copy($path, $toCopy);
-
-        $dokter = Dokter::where('username', 'anu123')->first();
         
         $this->assertDatabaseHas('dokter', [
-            'id_dokter'  => $dokter->id_dokter
+            'id_dokter'     => $data->id_dokter,
+            'foto'          => $data->foto,     
+            'username'      => $data->username,     
+            'nama_dokter'   => $data->nama_dokter, 
+            'id_poli'       => $data->id_poli
         ]);
     }
 
-    public function test_editProfile(){
-        $id   = 10;
-        $data = [
-            'username'      => 'riyannto123',
-            'nama_dokter'   => 'riyantoYusufWijaya',
-            'no_telp'       => '08123910123',
-        ];
+    public function test_editProfile_notelp(){
+        $param1     = 17;
+        $param2     = '081922174396';
+        $data       = ['no_telp' => $param2];
 
-        Dokter::where('id_dokter', $id)->update($data);
+        Dokter::where('id_dokter', $param1)->update($data);
 
         $this->assertDatabaseHas('dokter', [
-            'id_dokter'     => $id,
-            'username'      => 'riyannto123'
+            'id_dokter'     => $param1,
+            'no_telp'       => $param2
         ]);
     }
 }
