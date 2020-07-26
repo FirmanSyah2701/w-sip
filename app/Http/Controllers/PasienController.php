@@ -19,10 +19,7 @@ class PasienController extends Controller
     public function loginPasien(Request $request){
         $auth = auth()->guard('pasien');
 
-        $credentials = [
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ];
+        $credentials = $request->only('username', 'password');
 
         $validator = Validator::make($request->all(),[
                 'username'  => 'required|exists:pasien',
@@ -46,7 +43,6 @@ class PasienController extends Controller
             }else{
                 return redirect()
                     ->back()
-                    ->withInput($request->input())
                     ->withErrors(
                         ['password' => 'password anda salah']
                     );
@@ -65,7 +61,7 @@ class PasienController extends Controller
 
     public function registerPasien(Request $request){
         $request->validate([
-            'username'          => 'required|unique:pasien|alpha_num|max:50',
+            'username'          => 'required|unique:pasien|string|max:50|regex:/^[a-zA-Z0-9_]*$/',
             'nama_pasien'       => 'required|max:100|string|regex:/^[a-zA-Z\s\']*$/',
             'jk'                => 'required|in:laki-laki,perempuan',
             'umur'              => 'required|min:1|max:100|numeric|regex:/^[0-9]*$/',
@@ -79,8 +75,8 @@ class PasienController extends Controller
             'nama_pasien.max'       => 'Nama pasien maksimal 100 karakter',
             'username.required'     => 'username belum diisi',
             'username.unique'       => 'Akun sudah terdaftar',
-            'username.alpha_num'    => 'Format username berupa huruf atau angka 
-                                        dan tidak boleh menggunakan spasi',
+            'username.regex'        => 'Format username berupa huruf atau angka 
+                                        dan tidak boleh menggunakan spasi hanya boleh _',
             'username.max'          => 'Username maksimal panjang 50 karakter',
             'id_poli.required'      => 'Poli belum diisi',
             'jk.required'           => 'Jenis kelamin belum diisi',

@@ -19,7 +19,7 @@ class AntrianController extends Controller
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
-            $antrian  = Antrian::all()->sortBy('no_antrian');   
+            $antrian  = Antrian::all()->orderBy('no_antrian', 'asc');   
             $poli     = Poli::all();
     	    return view('admin.dataAntrian',compact('antrian', 'poli'));     
         }
@@ -129,7 +129,7 @@ class AntrianController extends Controller
             $data->umur         = $request->umur;
             $data->no_telp      = $request->no_telp;
             $data->tanggal      = $request->tanggal;
-            $data->status = 0;
+            $data->status       = 0;
             $data->save();
             return redirect()->route('pesanAntrian')->with('success', 'Pesanan Berhasil Disimpan');
         }else{
@@ -215,7 +215,7 @@ class AntrianController extends Controller
                 ->back()
                 ->withErrors('Pada poli tersebut nomer antrian tidak boleh sama');
         }else{
-            $data   = Antrian::find($id_antrian);
+            $data = Antrian::find($id_antrian);
             $data->no_antrian = $request->no_antrian;
             $data->status     = 1;
             $data->save();

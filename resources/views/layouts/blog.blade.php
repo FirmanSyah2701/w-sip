@@ -87,11 +87,12 @@
                 </div>
             </div>
             <div class="row">
-            @foreach ($blog as $blog)
+            @foreach ($blogs as $blog)
                 <div class="col-md-4" height="300px">
                     <div class="single-home-blog">
                         <div class="card mt-5">
-                            <img src="{{ url('assets/img/uploads/'.$blog->foto) }}" class="card-img-top" alt="blog" height="300"> 
+                            <img src="{{ url('assets/img/uploads/'.$blog->foto) }}" class="card-img-top" 
+                                alt="blog" height="300"> 
                             <div class="card-body">
                                     <h5 class="card-title">{{$blog->judul}}</h5>
                                 <ul>
@@ -100,7 +101,7 @@
                                     </li>
                                     <br>
                                     <li> 
-                                        <span><a href="{{ url('/detail_blog/'.$blog->slug)}}" style="color : blue">
+                                        <span><a href="{{ url('detail_blog/'.$blog->slug)}}" style="color : blue">
                                             Selengkapnya...
                                         </a></span>
                                     </li>
@@ -110,9 +111,10 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
-                
+            @endforeach    
             </div>
+            
+            {{ $blogs->links() }}
         </div>
     </section>
    
@@ -127,14 +129,10 @@
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-xl-2 col-md-6 col-sm-6 single-footer-widget">
-                    <a href="{{ url('/') }}" class="footer_logo"> <img src="{{ url('assets/z/img/logopus2.png') }}" alt="#"> </a>
-                        <p>Puskesmas Plumbon Indramayu</p>
-                        {{-- <div class="social_logo">
-                            <a href="#"><i class="ti-facebook"></i></a>
-                            <a href="#"> <i class="ti-twitter"></i> </a>
-                            <a href="#"><i class="ti-instagram"></i></a>
-                            <a href="#"><i class="ti-skype"></i></a>
-                        </div> --}}
+                    <a href="{{ url('/') }}" class="footer_logo">
+                        <img src="{{ url('assets/z/img/logopus2.png') }}" alt="#"> 
+                    </a>
+                    <p>Puskesmas Plumbon Indramayu</p>
                     </div>
                     <div class="col-xl-8 col-sm-6 col-md-6 single-footer-widget">
                         <h4>Alamat</h4>

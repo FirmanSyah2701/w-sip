@@ -181,15 +181,16 @@
 
                                             @foreach($datas as $blog)
                                                 <tr>
-                                                    <td>{{$no++}}</td>       
+                                                    <td>{{ $no++ }}</td>       
                                                     <td>
                                                         <img class="mx-auto d-block img-responsive" 
                                                             width="260px" height="200px" 
                                                             src="{{ url('/assets/img/uploads/'.$blog->foto) }}" 
                                                             alt="blog">
                                                     </td>
-                                                    <td>{{ $blog->judul }}</td>
-                                                    <td>{{ $blog->keterangan }}</td>
+                                                    <td> {{ $blog->judul }}</td>
+                                                
+                                                    <td>{!! $blog->keterangan !!}</td>
                                                     <td>@date($blog->tanggal)</td>
                                                     <td>
                                                         <div>  

@@ -28,9 +28,8 @@ class PoliController extends Controller
             'nama_poli.regex'       => 'Nama poli harus diisi dengan huruf'
         ]);
 
-        $data = new Poli();
-        $data->nama_poli = $request->nama_poli;
-        $data->save();
+        Poli::create($request->only('nama_poli'));
+        
         alert()->success('Data Poli Berhasil Ditambah', 'Berhasil!');
         return redirect('admin/poli');
     }
@@ -64,10 +63,8 @@ class PoliController extends Controller
             'nama_poli.max'         => 'Nama poli panjang karakter maksima 100',
             'nama_poli.regex'       => 'Nama poli harus diisi dengan huruf'
         ]);
-
-        $data = Poli::find($id_poli);
-        $data->nama_poli = $request->nama_poli;
-        $data->save();
+        
+        Poli::whrere($id_poli)->update($request->only('nama_poli'));
         alert()->success('Data Poli Berhasil Diubah', 'Berhasil!');
         return redirect('admin/poli');
     }

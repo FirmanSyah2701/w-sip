@@ -23,11 +23,11 @@ class AdminController extends Controller
         }
         else{ 
             Antrian::whereRaw('tanggal < now() - interval 1 DAY')->delete();
-            $dokter  = Dokter::count();
             $poli    = Poli::count();
             $blog    = Blog::count();
-            $antrian = Antrian::count();
             $pasien  = Pasien::count();
+            $dokter  = Dokter::count();
+            $antrian = Antrian::count();
             return view('admin.DashboardAdmin', compact(
                 'dokter','poli','blog','antrian','pasien'
             ));
@@ -45,12 +45,10 @@ class AdminController extends Controller
     public function loginAdminPost(Request $request){
         $auth = auth()->guard('admin');
 
-        $credentials = [
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ];
+        $credentials = $request->only('username', 'password');
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(),
+            [
                 'username'  => 'required|string|exists:admin',
                 'password'  => 'required|string',
             ], 

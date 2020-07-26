@@ -56,7 +56,7 @@ class BlogController extends Controller
             alert()->error('Kamu Harus Login Dulu!', 'Peringatan!');
             return redirect('/admin/loginAdmin');
         }else{
-    	    $datas = Blog::all()->sortByDesc('tanggal');         
+    	    $datas = Blog::all()->orderBy('desc', 'tanggal');         
             return view('admin.blog_admin',compact('datas'));  
         }   
     }
@@ -115,8 +115,8 @@ class BlogController extends Controller
     }
 
     public function blogPage(){
-        $blog = Blog::orderBy('created_at', 'desc')->get();
-        return view('layouts.blog', compact('blog')); 
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
+        return view('layouts.blog', compact('blogs')); 
     }
 
     public function detailBlog($slug){

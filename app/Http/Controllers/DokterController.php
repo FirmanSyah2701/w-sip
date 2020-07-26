@@ -167,10 +167,7 @@ class DokterController extends Controller
     public function loginDokterPost(Request $request){
         $auth = auth()->guard('dokter');
 
-        $credentials = [
-            'username'  => $request->username,
-            'password'  => $request->password,
-        ];
+        $credentials = $request->only('username', 'password');
 
         $validator = Validator::make($request->all(),[
                 'username'  => 'required|exists:dokter',
@@ -191,7 +188,6 @@ class DokterController extends Controller
             
                 session()->put('dokter', $dokter->id_dokter);
                 session()->put('nama_dokter', $dokter->nama_dokter);
-                //session()->put('jk_dokter', $dokter->jk);
                 $konsul  = Konsul::where('id_dokter', $dokter->id_dokter)->count();
                 $medis   = RekamMedis::where('id_dokter', $dokter->id_dokter)->count(); 
                 return view('dokter.DashboardDokter', compact('konsul', 'medis'));

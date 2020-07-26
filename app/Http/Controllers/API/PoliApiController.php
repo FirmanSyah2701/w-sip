@@ -33,9 +33,7 @@ class PoliApiController extends Controller
             ]);
         }
 
-        $data = Poli::create([
-            'nama_poli' => $request->nama_poli
-        ]);
+        $data = Poli::create($request->only('nama_poli'));
 
         if($data){
             return response()->json([
@@ -64,9 +62,7 @@ class PoliApiController extends Controller
             ]);
         }
 
-        $update = Poli::where('id_poli', $id)->update([
-            'nama_poli' => $request->nama_poli
-        ]);
+        $update = Poli::where('id_poli', $id)->update($request->only('nama_poli'));
 
         if($update){
             return response()->json([

@@ -26,7 +26,11 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ url('assets/z/css/style.css') }}">
 </head>
-
+<style>
+    p{
+        color: black;
+    }
+</style>
 <body>
     <!--::header part start::-->
     <header class="main_menu">
@@ -34,7 +38,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="{{ url('assets/z/img/logopus2.png') }}" alt="logo"> </a>
+                        <a class="navbar-brand" href="{{ url('/') }}"> 
+                            <img src="{{ url('assets/z/img/logopus2.png') }}" alt="logo"> 
+                        </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +88,7 @@
             <div class="col-lg-8 posts-list" style="width: 800px; margin: 0 auto;">
                <div class="single-post">
                     <div class="feature-img">
-                        <img class="img-fluid" src="{{ asset('uploads/'.$blog->gambar) }}" alt="">
+                        <img class="img-fluid" src="{{ url('assets/img/uploads/'.$blog->foto) }}" alt="blog">
                     </div>
                     <div class="blog_details">
                         <h2>{{$blog->judul}}
@@ -91,9 +97,8 @@
                             <li><i class="far fa-user"></i> @date($blog->tanggal) </a></li>
                             <li><i class="far fa-comments"></i> Plumbon, Indramayu Jawa Barat</a></li>
                         </ul>
-                        <p class="excert">
-                            {{$blog->keterangan}}
-                        </p>
+                            {!! $blog->keterangan !!}
+                        
                         <a class="btn btn-warning btn-md" href="{{ url('blog') }}" 
                             style="border-radius: 50px; text-size:12px;">
                             {{-- <i class="ti-arrow-left"></i> Kembali</a> --}}

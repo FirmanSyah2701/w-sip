@@ -356,7 +356,7 @@ p {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 24px;
-  color: #878787; }
+  color: #000; }
 
 p:focus {
   border: none;

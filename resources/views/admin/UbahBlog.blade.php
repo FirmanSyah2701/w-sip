@@ -22,7 +22,11 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
+    <style>
+        p{
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <!-- Left Panel -->
@@ -273,9 +277,8 @@
             selector:'textarea', 
             theme:'modern',
             height:400, 
-            forced_root_block: false,
-            valid_elements:"a[href|target=_blank], strong/b,div[align],br",
-            branding:false
+            branding:false,
+            statusbar: false
         });  
     </script>
 

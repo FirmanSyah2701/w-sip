@@ -93,9 +93,9 @@ class KonsulController extends Controller
             'jawaban_dokter.required' => 'Jawaban tidak boleh kosong'
         ]);
 
-        $data = Konsul::find($id_konsultasi);
-        $data->jawaban_dokter = $request->jawaban_dokter;
-        $data->save();
+        Konsul::where('id_konsultasi', $id_konsultasi)
+            ->update($request->only('jawaban_dokter'));
+
         alert()->success('Jawaban Terkirim', 'Berhasil');
         return redirect('dokter/dataKonsultasi');
     }
